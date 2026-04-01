@@ -1617,30 +1617,42 @@ function renderMilestones(streak){
 function renderCheckinCard(){
   const today=fmt(new Date()), c=document.getElementById('checkin-card');
   const status=state.days[today];
-  if(!status) return;
-  const cfg = {
-    clean: {
-      icon:'🙌', color:'var(--green)',
-      title:'Logged as clean!',
-      sub:'Keep the streak alive 🔥'
-    },
-    urge: {
-      icon:'💪', color:'var(--accent)',
-      title:'Urge resisted!',
-      sub:'You felt it and beat it. That counts.'
-    },
-    relapse: {
-      icon:'💙', color:'var(--red)',
-      title:'Slip logged.',
-      sub:'Every setback is data. Tomorrow is a new start.'
-    },
-  };
-  const s = cfg[status] || cfg.relapse;
-  c.innerHTML=`<div style="text-align:center;padding:8px 0">
-    <div style="font-size:36px;margin-bottom:8px">${s.icon}</div>
-    <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:${s.color}">${s.title}</div>
-    <div style="font-size:13px;color:var(--muted);margin-top:6px">${s.sub}</div>
-  </div>`;
+
+  // Clean or relapse — day is fully logged, just show the result
+  if(status==='clean' || status==='relapse'){
+    const cfg = {
+      clean:   {icon:'🙌', color:'var(--green)', title:'Logged as clean!',  sub:'Keep the streak alive 🔥'},
+      relapse: {icon:'💙', color:'var(--red)',   title:'Slip logged.',       sub:'Every setback is data. Tomorrow is a new start.'},
+    };
+    const s = cfg[status];
+    c.innerHTML=`<div style="text-align:center;padding:8px 0">
+      <div style="font-size:36px;margin-bottom:8px">${s.icon}</div>
+      <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:${s.color}">${s.title}</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">${s.sub}</div>
+    </div>`;
+    return;
+  }
+
+  // Urge resisted — show the badge but KEEP the check-in buttons so they
+  // can still log how the rest of the day went
+  if(status==='urge'){
+    c.innerHTML=`
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0 14px;border-bottom:1px solid var(--border);margin-bottom:14px">
+        <div style="font-size:28px">💪</div>
+        <div>
+          <div style="font-family:var(--fd);font-size:15px;font-weight:800;color:var(--accent)">Urge resisted!</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">How did the rest of the day go?</div>
+        </div>
+      </div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">Log your day:</div>
+      <div style="display:flex;gap:8px">
+        <button onclick="logDay('clean')" style="flex:1;padding:12px;background:var(--green-dim);border:1px solid rgba(61,224,160,.3);border-radius:var(--rs);color:var(--green);font-family:var(--fd);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s">✓ Stayed Clean</button>
+        <button onclick="logDay('relapse')" style="flex:1;padding:12px;background:var(--red-dim);border:1px solid rgba(255,69,69,.2);border-radius:var(--rs);color:var(--red);font-family:var(--fd);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s">✗ Had a Slip</button>
+      </div>`;
+    return;
+  }
+
+  // No status yet — show the default check-in buttons (already in HTML, nothing to do)
 }
 
 function logDay(status){
