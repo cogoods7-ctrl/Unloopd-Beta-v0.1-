@@ -639,7 +639,6 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
   <div class="beta-banner">🧪 Beta v0.1 — thanks for testing! Your feedback shapes what's next.</div>
   <div class="tabnav">
     <div class="tab active" onclick="showTab('home')"><span class="tab-icon">🏠</span>Home</div>
-    <div class="tab" onclick="showTab('urge')"><span class="tab-icon">⚡</span>Urge</div>
     <div class="tab" onclick="showTab('log')"><span class="tab-icon">📊</span>Progress</div>
     <div class="tab" id="partner-tab" onclick="showTab('partner')"><span class="tab-icon">👥</span>Friends</div>
   </div>
@@ -1561,7 +1560,7 @@ function resetAll(){
 
 /* ═══════════════════════════ NAVIGATION ═════════════════════════════ */
 function showTab(t){
-  const tabs=['home','urge','log','partner'];
+  const tabs=['home','log','partner'];
   document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',tabs[i]===t));
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
   document.getElementById('page-'+t).classList.add('active');
