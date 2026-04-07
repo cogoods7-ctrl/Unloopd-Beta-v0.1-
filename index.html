@@ -583,6 +583,32 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
 .ss-meta{font-size:11px;color:var(--muted2);font-weight:600;letter-spacing:.5px}
 .ss-next-btn{align-self:flex-start;padding:7px 14px;background:var(--s2);border:1px solid var(--border2);border-radius:20px;color:var(--muted);font-family:var(--fd);font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.3px}
 .ss-next-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── MESSAGES TAB ── */
+.msgs-header{padding:4px 0 8px}
+.msgs-title{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:4px}
+.msgs-sub{font-size:13px;color:var(--muted);font-weight:300}
+.conv-list{display:flex;flex-direction:column;gap:6px}
+.conv-item{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:all .18s;position:relative}
+.conv-item:hover{border-color:var(--border2);transform:translateY(-1px)}
+.conv-item:active{transform:scale(.99)}
+.conv-item.unread{border-color:rgba(13,207,191,.2);background:linear-gradient(135deg,rgba(13,207,191,.04),var(--s1))}
+.conv-avatar{width:46px;height:46px;border-radius:13px;background:var(--accent-dim);border:1px solid rgba(13,207,191,.2);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:17px;font-weight:800;color:var(--accent);flex-shrink:0;position:relative}
+.conv-unread-dot{position:absolute;top:-3px;right:-3px;width:12px;height:12px;background:var(--orange);border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 6px var(--orange-glow)}
+.conv-body{flex:1;min-width:0}
+.conv-name{font-family:var(--fd);font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:3px}
+.conv-preview{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:300}
+.conv-preview.unread-text{color:var(--text);font-weight:500}
+.conv-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.conv-time{font-size:10px;color:var(--muted2);letter-spacing:.3px}
+.conv-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:var(--fd)}
+.conv-streak{font-size:10px;padding:2px 7px;background:var(--orange-dim);color:var(--orange);border-radius:20px;font-weight:800;font-family:var(--fd)}
+.msgs-empty{text-align:center;padding:60px 20px;color:var(--muted);font-size:14px;line-height:1.75;font-weight:300}
+.msgs-empty-icon{font-size:48px;margin-bottom:14px}
+.msgs-no-plus{background:linear-gradient(135deg,rgba(167,139,250,.06),rgba(124,90,240,.04));border:1px solid rgba(167,139,250,.2);border-radius:var(--card-r);padding:24px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.msgs-no-plus-icon{font-size:40px}
+.msgs-no-plus-title{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:-.3px;color:#a78bfa}
+.msgs-no-plus-sub{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;max-width:280px}
 </style>
 </head>
 <body>
@@ -640,6 +666,7 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
   <div class="tabnav">
     <div class="tab active" onclick="showTab('home')"><span class="tab-icon">🏠</span>Home</div>
     <div class="tab" onclick="showTab('log')"><span class="tab-icon">📊</span>Progress</div>
+    <div class="tab" id="messages-tab" onclick="showTab('messages')"><span class="tab-icon">💬</span>Messages</div>
     <div class="tab" id="partner-tab" onclick="showTab('partner')"><span class="tab-icon">👥</span>Friends</div>
   </div>
 
@@ -831,7 +858,18 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
     </div>
   </div>
 
-  <!-- ── PARTNER / FRIENDS PAGE ── -->
+  <!-- ═══════════════════════════ MESSAGES PAGE ════════════════════════ -->
+  <div class="page" id="page-messages">
+    <div class="msgs-header">
+      <div class="msgs-title">Messages</div>
+      <div class="msgs-sub" id="msgs-sub">Your conversations</div>
+    </div>
+    <div id="msgs-list-content">
+      <div class="ai-loading"><div class="ai-dots"><span></span><span></span><span></span></div><span>Loading conversations...</span></div>
+    </div>
+  </div>
+
+<!-- ── PARTNER / FRIENDS PAGE ── -->
   <div class="page" id="page-partner">
     <div class="my-handle-banner">
       <div>
@@ -1543,6 +1581,8 @@ function startMainApp(){
   checkReEngagement();
   startPartnerPoll();
   checkPartnerAlerts();
+  // Load message previews and show badge if there are unread messages
+  loadConversationPreviews().then(()=>updateMessagesBadge());
   setInterval(renderHome, 60000);
 }
 
@@ -1560,13 +1600,14 @@ function resetAll(){
 
 /* ═══════════════════════════ NAVIGATION ═════════════════════════════ */
 function showTab(t){
-  const tabs=['home','log','partner'];
+  const tabs=['home','log','messages','partner'];
   document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',tabs[i]===t));
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
   document.getElementById('page-'+t).classList.add('active');
   currentTab=t;
   if(t==='urge'){ startUrgeTimer(); renderUrgeExtras(); }
   if(t==='log') renderLog();
+  if(t==='messages') renderMessagesTab();
   if(t==='partner'){ renderFriendsTab(); startPartnerPoll(); }
   else { if(t!=='partner') stopPartnerPoll(); }
 }
@@ -2251,15 +2292,150 @@ function copyMyHandle(){
 }
 
 /* ═══════════════════════════ MESSAGING ══════════════════════════════ */
+/* ═══════════════════════════ MESSAGES TAB ═══════════════════════════
+   Unread tracking: when a chat is opened we store the last message
+   timestamp we saw per friend. On poll we compare against latest msg.
+════════════════════════════════════════════════════════════════════ */
+
 function hasUnread(friendId){
-  // We track last read by storing msgCount when we last opened chat
-  return false; // Simple: could extend with actual count tracking
+  const lastSeen = (state.lastRead||{})[friendId] || 0;
+  const conv = msgCache[friendId];
+  if(!conv || !conv.length) return false;
+  const lastMsg = conv[conv.length-1];
+  return lastMsg.senderId !== state.userId && new Date(lastMsg.ts).getTime() > lastSeen;
 }
 
 function countUnreadMessages(){
-  // For now, return 0; full unread tracking can be added
-  return 0;
+  return state.friends.filter(f => hasUnread(f.userId)).length;
 }
+
+// In-memory cache of loaded conversations so the list renders fast
+const msgCache = {};
+
+async function loadConversationPreviews(){
+  // Load last message for each friend conversation
+  for(const friend of state.friends){
+    try{
+      const rId = roomId(state.userId, friend.userId);
+      const r = await storage.get('chat:'+rId, true);
+      const msgs = JSON.parse(r.value);
+      if(msgs && msgs.length) msgCache[friend.userId] = msgs;
+    }catch(e){ /* no messages yet */ }
+  }
+}
+
+async function renderMessagesTab(){
+  const el = document.getElementById('msgs-list-content');
+  if(!el) return;
+
+  if(!state.isPlusUser){
+    el.innerHTML=`<div class="msgs-no-plus">
+      <div class="msgs-no-plus-icon">💬</div>
+      <div class="msgs-no-plus-title">Messages are Plus only</div>
+      <div class="msgs-no-plus-sub">Upgrade to Plus to message your friends and set an accountability partner.</div>
+      <button class="paywall-cta" style="max-width:240px" onclick="openPaywall()">✦ Unlock Plus</button>
+    </div>`;
+    return;
+  }
+
+  if(!state.friends.length){
+    el.innerHTML=`<div class="msgs-empty">
+      <div class="msgs-empty-icon">💬</div>
+      Add friends to start messaging.<br>
+      <span style="font-size:12px;color:var(--muted2)">Go to Friends → Find to connect with people.</span>
+    </div>`;
+    return;
+  }
+
+  // Show loading skeleton while fetching
+  el.innerHTML=`<div class="ai-loading"><div class="ai-dots"><span></span><span></span><span></span></div><span>Loading conversations...</span></div>`;
+
+  await loadConversationPreviews();
+
+  // Sort friends: unread first, then by latest message time
+  const sorted = [...state.friends].sort((a, b) => {
+    const aUnread = hasUnread(a.userId) ? 1 : 0;
+    const bUnread = hasUnread(b.userId) ? 1 : 0;
+    if(bUnread !== aUnread) return bUnread - aUnread;
+    const aMsgs = msgCache[a.userId] || [];
+    const bMsgs = msgCache[b.userId] || [];
+    const aTime = aMsgs.length ? new Date(aMsgs[aMsgs.length-1].ts).getTime() : 0;
+    const bTime = bMsgs.length ? new Date(bMsgs[bMsgs.length-1].ts).getTime() : 0;
+    return bTime - aTime;
+  });
+
+  const html = sorted.map(friend => {
+    const msgs = msgCache[friend.userId] || [];
+    const lastMsg = msgs.length ? msgs[msgs.length-1] : null;
+    const unread = hasUnread(friend.userId);
+    const preview = lastMsg
+      ? (lastMsg.senderId === state.userId ? 'You: ' : '') + lastMsg.text
+      : 'No messages yet — say hi!';
+    const timeStr = lastMsg
+      ? timeAgo(new Date(lastMsg.ts).toISOString())
+      : '';
+    const unreadCount = msgs.filter(m =>
+      m.senderId !== state.userId &&
+      new Date(m.ts).getTime() > ((state.lastRead||{})[friend.userId] || 0)
+    ).length;
+
+    return `<div class="conv-item${unread?' unread':''}" onclick="openChatWith('${friend.userId}')">
+      <div class="conv-avatar">
+        ${initials(friend.displayName)}
+        ${unread ? '<div class="conv-unread-dot"></div>' : ''}
+      </div>
+      <div class="conv-body">
+        <div class="conv-name">${escHtml(friend.displayName)}</div>
+        <div class="conv-preview${unread?' unread-text':''}">${escHtml(preview)}</div>
+      </div>
+      <div class="conv-right">
+        ${timeStr ? `<div class="conv-time">${timeStr}</div>` : ''}
+        ${unreadCount > 0 ? `<div class="conv-badge">${unreadCount}</div>` : `<div class="conv-streak">🔥 ${friend.streak||0}</div>`}
+      </div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `<div class="conv-list">${html}</div>`;
+  updateMessagesBadge();
+}
+
+function updateMessagesBadge(){
+  const count = countUnreadMessages();
+  const tab = document.getElementById('messages-tab');
+  if(!tab) return;
+  let badge = tab.querySelector('.tab-badge');
+  if(count > 0){
+    if(!badge){ badge = document.createElement('span'); badge.className='tab-badge'; tab.appendChild(badge); }
+    badge.textContent = count;
+  } else {
+    if(badge) badge.remove();
+  }
+}
+
+// Override openChatWith to track last-read timestamp
+const _origOpenChat = openChatWith;
+async function openChatWith(friendId){
+  if(!state.isPlusUser){ openPaywall(); return; }
+  const friend = state.friends.find(f=>f.userId===friendId);
+  if(!friend) return;
+  // Mark as read
+  state.lastRead = state.lastRead || {};
+  state.lastRead[friendId] = Date.now();
+  save();
+  updateMessagesBadge();
+  // Re-render messages list if it's open
+  if(currentTab === 'messages') renderMessagesTab();
+  chatFriend = friend;
+  document.getElementById('chat-friend-name').textContent = friend.displayName;
+  document.getElementById('chat-friend-meta').textContent = '@'+friend.username+' · Breaking: "'+friend.habit+'"';
+  document.getElementById('chat-streak-badge').textContent = '🔥 '+(friend.streak||0);
+  document.getElementById('chat-msgs').innerHTML=`<div class="ai-loading"><div class="ai-dots"><span></span><span></span><span></span></div><span>Loading messages...</span></div>`;
+  document.getElementById('chat-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  await loadChatMessages();
+  startChatPoll();
+}
+window.openChatWith = openChatWith;
 
 async function openChatWith(friendId){
   if(!state.isPlusUser){ openPaywall(); return; }
@@ -2338,7 +2514,20 @@ async function sendChatMessage(){
 function startChatPoll(){
   clearInterval(chatPollTimer);
   chatPollTimer=setInterval(async()=>{
-    if(chatFriend) await loadChatMessages();
+    if(chatFriend){
+      await loadChatMessages();
+      // Update cache and badge
+      const rId=roomId(state.userId,chatFriend.userId);
+      try{
+        const r=await storage.get('chat:'+rId,true);
+        msgCache[chatFriend.userId]=JSON.parse(r.value);
+        // Mark as read since chat is open
+        state.lastRead=state.lastRead||{};
+        state.lastRead[chatFriend.userId]=Date.now();
+        save();
+      }catch(e){}
+      updateMessagesBadge();
+    }
   }, 4000);
 }
 
@@ -2349,6 +2538,10 @@ function startPartnerPoll(){
     await checkAcceptedRequests();
     await refreshFriendProfiles();
     await checkPartnerAlerts();
+    // Refresh message previews and badge in background
+    await loadConversationPreviews();
+    updateMessagesBadge();
+    if(currentTab==='messages') renderMessagesTab();
     if(currentTab==='partner'){
       await renderFriendsTab();
       if(currentFriendsSub==='feed') loadFeed();
