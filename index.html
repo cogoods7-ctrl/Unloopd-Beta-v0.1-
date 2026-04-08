@@ -609,6 +609,10 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
 .msgs-no-plus-icon{font-size:40px}
 .msgs-no-plus-title{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:-.3px;color:#a78bfa}
 .msgs-no-plus-sub{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;max-width:280px}
+
+/* ── REMOVE FRIEND ── */
+.remove-friend-btn{padding:5px 10px;background:none;border:1px solid var(--border);border-radius:var(--rs);color:var(--muted2);font-size:11px;font-family:var(--fd);font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.remove-friend-btn:hover{border-color:rgba(240,61,61,.4);color:var(--red);background:var(--red-dim)}
 </style>
 </head>
 <body>
@@ -2197,7 +2201,6 @@ function renderFriendsList(){
     return;
   }
   const apId = state.accountabilityPartner?.userId;
-  // AP card at top if set
   const apHtml = apId
     ? `<div id="ap-card-container" style="margin-bottom:12px"></div>`
     : `<div id="ap-card-container" style="margin-bottom:0"></div>`;
@@ -2229,13 +2232,36 @@ function renderFriendsList(){
         <div class="friend-streak-badge">🔥 ${f.streak||0}</div>
         ${chatBtn}
         ${apBtn}
+        <button class="remove-friend-btn" onclick="removeFriend('${f.userId}','${escHtml(f.displayName)}')">Remove</button>
       </div>
     </div>`;
   }).join('');
-  // Render AP card after innerHTML set
   renderAPCard();
   window.setAccountabilityPartner = setAccountabilityPartner;
 }
+
+async function removeFriend(userId, displayName){
+  if(!confirm(`Remove ${displayName} as a friend?`)) return;
+  // Remove from local state
+  state.friends = state.friends.filter(f => f.userId !== userId);
+  // If they were the accountability partner, remove that too
+  if(state.accountabilityPartner?.userId === userId){
+    state.accountabilityPartner = null;
+  }
+  // Remove from msgCache
+  delete msgCache[userId];
+  // Clean up shared storage keys
+  try{ await storage.delete('req:'+state.userId+':'+userId, true); }catch(e){}
+  try{ await storage.delete('req:'+userId+':'+state.userId, true); }catch(e){}
+  try{ await storage.delete('accept:'+state.userId+':'+userId, true); }catch(e){}
+  try{ await storage.delete('accept:'+userId+':'+state.userId, true); }catch(e){}
+  save();
+  toast(displayName+' removed from friends.', '');
+  renderFriendsList();
+  renderAPCard();
+  updateMessagesBadge();
+}
+window.removeFriend = removeFriend;
 
 async function loadAndRenderRequests(){
   const inEl=document.getElementById('requests-incoming-content');
