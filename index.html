@@ -613,46 +613,249 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
 /* ── REMOVE FRIEND ── */
 .remove-friend-btn{padding:5px 10px;background:none;border:1px solid var(--border);border-radius:var(--rs);color:var(--muted2);font-size:11px;font-family:var(--fd);font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.3px}
 .remove-friend-btn:hover{border-color:rgba(240,61,61,.4);color:var(--red);background:var(--red-dim)}
+
+/* ═══════════════ ONBOARDING ═══════════════ */
+#setup-screen{flex:1;display:flex;flex-direction:column;position:relative;z-index:1;min-height:100vh}
+.onboard-step{display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px 40px;min-height:100vh;animation:fadeUp .3s ease}
+.onboard-step.active{display:flex}
+.onboard-welcome{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:420px;width:100%;gap:0}
+.onboard-logo{font-family:var(--fd);font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px;color:var(--muted3);margin-bottom:32px}
+.onboard-welcome-icon{font-size:64px;margin-bottom:20px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1)}
+.onboard-welcome-title{font-family:var(--fd);font-size:clamp(30px,8vw,48px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:16px}
+.onboard-welcome-title em{color:var(--accent);font-style:normal}
+.onboard-welcome-sub{font-size:15px;color:var(--muted);line-height:1.65;max-width:320px;font-weight:300;margin-bottom:36px}
+.onboard-cta{padding:16px 32px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:16px;font-weight:800;cursor:pointer;width:100%;max-width:380px;transition:all .15s;letter-spacing:.3px;box-shadow:0 8px 24px var(--accent-glow)}
+.onboard-cta:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.onboard-cta:disabled{opacity:.35;cursor:not-allowed;transform:none;filter:none;box-shadow:none}
+.onboard-social-proof{font-size:12px;color:var(--muted2);margin-top:16px;letter-spacing:.5px}
+.onboard-card{background:var(--s1);border:1px solid var(--border2);border-radius:24px;padding:28px 24px 24px;width:100%;max-width:460px;display:flex;flex-direction:column;gap:14px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.onboard-step-indicator{display:flex;gap:6px;justify-content:center;margin-bottom:4px}
+.step-dot{width:6px;height:6px;border-radius:3px;background:var(--border2);transition:all .3s}
+.step-dot.active{background:var(--accent);width:18px}
+.step-dot.done{background:var(--accent);opacity:.5}
+.onboard-step-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-align:center}
+.onboard-q{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:-.6px;line-height:1.2;text-align:center}
+.onboard-q-sub{font-size:13px;color:var(--muted);text-align:center;line-height:1.55;font-weight:300}
+.onboard-option-list{display:flex;flex-direction:column;gap:8px}
+.onboard-opt{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--s2);border:1px solid var(--border2);border-radius:14px;cursor:pointer;transition:all .18s}
+.onboard-opt:hover{border-color:var(--accent);background:var(--accent-dim)}
+.onboard-opt.sel{border-color:var(--accent);background:var(--accent-dim)}
+.opt-icon{font-size:24px;flex-shrink:0;width:32px;text-align:center}
+.opt-label{font-family:var(--fd);font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:2px}
+.opt-sub{font-size:12px;color:var(--muted);font-weight:300}
+.onboard-trigger-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.onboard-trigger{padding:12px 10px;background:var(--s2);border:1px solid var(--border2);border-radius:12px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--muted);font-family:var(--fd)}
+.onboard-trigger:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.onboard-trigger.sel{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.onboard-next{padding:14px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.onboard-next:disabled{opacity:.35;cursor:not-allowed}
+.onboard-next:not(:disabled):hover{filter:brightness(1.07);transform:translateY(-1px)}
+.onboard-back{background:none;border:none;color:var(--muted2);font-size:13px;cursor:pointer;font-family:var(--fb);padding:4px;text-align:center;transition:color .15s}
+.onboard-back:hover{color:var(--muted)}
+
+/* ═══════════════ MILESTONE MODAL ═══════════════ */
+#milestone-modal{position:fixed;inset:0;z-index:350;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px}
+#milestone-modal.open{display:flex;animation:fadeIn .3s ease}
+.milestone-sheet{background:var(--s1);border:1px solid var(--border2);border-radius:28px;width:100%;max-width:400px;padding:40px 28px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative;overflow:hidden}
+.milestone-sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--orange),var(--purple));opacity:.8}
+.milestone-icon{font-size:72px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1)}
+.milestone-title{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--accent)}
+.milestone-days{font-family:var(--fd);font-size:16px;font-weight:700;color:var(--muted3);letter-spacing:.3px}
+.milestone-quote{font-size:14px;color:var(--muted);font-style:italic;line-height:1.65;font-weight:300;max-width:300px}
+.milestone-btn{padding:14px 32px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer;transition:all .15s;width:100%;margin-top:4px}
+.milestone-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+
+/* ═══════════════ PLAN MODAL ═══════════════ */
+#plan-modal{position:fixed;inset:0;z-index:340;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center}
+#plan-modal.open{display:flex;animation:fadeIn .25s ease}
+.plan-sheet{background:var(--s1);border:1px solid var(--border2);border-radius:28px 28px 0 0;width:100%;max-width:520px;padding:28px 24px 48px;display:flex;flex-direction:column;gap:14px;max-height:90vh;overflow-y:auto;animation:slideUp .35s cubic-bezier(.22,1,.36,1)}
+.plan-pill{width:36px;height:4px;background:var(--border3);border-radius:2px;margin:0 auto 4px}
+.plan-header-icon{font-size:40px;text-align:center}
+.plan-title{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.8px;text-align:center}
+.plan-sub{font-size:14px;color:var(--muted);text-align:center;line-height:1.6;font-weight:300}
+.plan-cards{display:flex;flex-direction:column;gap:10px}
+.plan-card{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:16px}
+.plan-card-week{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.plan-card-title{font-family:var(--fd);font-size:15px;font-weight:800;letter-spacing:-.2px;margin-bottom:4px}
+.plan-card-desc{font-size:13px;color:var(--muted);line-height:1.55;font-weight:300}
+
+/* ═══════════════ JOURNAL ═══════════════ */
+.journal-header{padding:4px 0 8px}
+.journal-title{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:4px}
+.journal-sub{font-size:13px;color:var(--muted);font-weight:300}
+.journal-write-card{background:var(--s1);border:1px solid var(--border2);border-radius:var(--card-r);padding:20px;display:flex;flex-direction:column;gap:12px}
+.journal-prompt{font-size:13px;color:var(--accent);font-weight:600;font-style:italic;min-height:18px;letter-spacing:.2px}
+.journal-write-card textarea{background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:14px;color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.65;outline:none;resize:none;transition:border-color .2s;width:100%}
+.journal-write-card textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.journal-write-card textarea::placeholder{color:var(--muted2)}
+.journal-actions{display:flex;align-items:center;justify-content:space-between}
+.journal-char-count{font-size:11px;color:var(--muted2);font-weight:500}
+.journal-save-btn{padding:10px 20px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:13px;font-weight:800;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.journal-save-btn:hover{filter:brightness(1.07)}
+.journal-entry-item{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
+.journal-entry-item:hover{border-color:var(--border2)}
+.journal-entry-date{font-size:10px;color:var(--muted2);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.journal-entry-text{font-size:14px;color:var(--text);line-height:1.65;font-weight:300;white-space:pre-wrap}
+.journal-entry-delete{align-self:flex-end;background:none;border:none;color:var(--muted2);font-size:11px;cursor:pointer;font-family:var(--fb);padding:2px;transition:color .15s}
+.journal-entry-delete:hover{color:var(--red)}
+.journal-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;line-height:1.75;font-weight:300}
+.journal-section-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* ═══════════════ PLAN PAGE ═══════════════ */
+.plan-page-header{padding:4px 0 8px}
+.plan-page-title{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:4px}
+.plan-page-sub{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5}
+.plan-week-section{margin-bottom:8px}
+.plan-week-label{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.plan-item{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.plan-item-icon{font-size:22px;flex-shrink:0;width:32px;text-align:center;margin-top:2px}
+.plan-item-body{}
+.plan-item-title{font-family:var(--fd);font-size:14px;font-weight:800;letter-spacing:-.2px;margin-bottom:3px}
+.plan-item-desc{font-size:12px;color:var(--muted);line-height:1.55;font-weight:300}
+
+/* ═══════════════ HOME — VIEW PLAN BUTTON ═══════════════ */
+.view-plan-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;background:linear-gradient(135deg,rgba(13,207,191,.08),rgba(13,207,191,.04));border:1px solid rgba(13,207,191,.2);border-radius:var(--card-r);cursor:pointer;width:100%;text-align:left;transition:all .18s}
+.view-plan-btn:hover{border-color:var(--accent);background:var(--accent-dim)}
+.view-plan-icon{font-size:28px;flex-shrink:0}
+.view-plan-text{}
+.view-plan-title{font-family:var(--fd);font-size:14px;font-weight:800;color:var(--accent);letter-spacing:-.2px;margin-bottom:2px}
+.view-plan-sub{font-size:12px;color:var(--muted);font-weight:300}
 </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════ SETUP ═══════════════════════════════ -->
 <div id="setup-screen">
-  <div class="setup-logo"><div class="logo-mark"></div>Unloopd</div>
-  <h1 class="setup-title">You already know<br>what's <em>holding you back.</em></h1>
-  <p class="setup-sub">Name the habit. We'll help you break the loop — for good.</p>
-  <div class="setup-card">
-    <div class="field-label">The habit I want to break</div>
-    <input type="text" id="setup-habit" placeholder="e.g. scrolling before bed, stress eating..." maxlength="100">
-    <div class="chips">
-      <div class="chip" onclick="pickHabit('Scrolling phone before bed')">📱 Phone before bed</div>
-      <div class="chip" onclick="pickHabit('Stress eating junk food')">🍟 Stress eating</div>
-      <div class="chip" onclick="pickHabit('Procrastinating on tasks')">⏳ Procrastinating</div>
-      <div class="chip" onclick="pickHabit('Vaping or smoking')">💨 Vaping/smoking</div>
-      <div class="chip" onclick="pickHabit('Pornography and lust')">🔒 Porn &amp; lust</div>
-      <div class="chip" onclick="pickHabit('Negative self-talk')">🧠 Negative self-talk</div>
-      <div class="chip" onclick="pickHabit('Drinking to unwind')">🍺 Drinking to unwind</div>
-      <div class="chip" onclick="pickHabit('Biting nails or skin picking')">✋ Nail biting</div>
-      <div class="chip" onclick="pickHabit('Impulse buying online')">🛒 Impulse buying</div>
+
+  <!-- STEP 1: WELCOME -->
+  <div class="onboard-step active" id="step-1">
+    <div class="onboard-welcome">
+      <div class="onboard-logo"><div class="logo-mark"></div>Unloopd</div>
+      <div class="onboard-welcome-icon">🔓</div>
+      <h1 class="onboard-welcome-title">You already know what's<br><em>holding you back.</em></h1>
+      <p class="onboard-welcome-sub">In the next 2 minutes we'll build your personal plan to break the loop — for good.</p>
+      <button class="onboard-cta" onclick="goStep(2)">Begin your journey →</button>
+      <div class="onboard-social-proof">Join thousands breaking their habits every day</div>
     </div>
-    <div class="field-gap"></div>
-    <div class="field-label">Why do you want to stop?</div>
-    <div class="why-grid" id="why-grid">
-      <div class="why-opt" onclick="pickWhy(this,'my health')"><span class="why-icon">💪</span>My health</div>
-      <div class="why-opt" onclick="pickWhy(this,'my productivity')"><span class="why-icon">🚀</span>Productivity</div>
-      <div class="why-opt" onclick="pickWhy(this,'my self-respect')"><span class="why-icon">🧠</span>Self-respect</div>
-      <div class="why-opt" onclick="pickWhy(this,'my relationships')"><span class="why-icon">❤️</span>Relationships</div>
-    </div>
-    <div class="field-gap"></div>
-    <div class="field-label">Your name</div>
-    <input type="text" id="setup-name" placeholder="What should we call you?" maxlength="30">
-    <div class="field-gap"></div>
-    <div class="field-label">Choose a @username</div>
-    <input type="text" id="setup-username" placeholder="e.g. alexj (letters, numbers, _)" maxlength="20">
-    <div class="username-hint" id="username-hint"></div>
-    <button class="btn" id="setup-btn" onclick="launchApp()" disabled>Start Breaking the Loop →</button>
   </div>
+
+  <!-- STEP 2: HABIT -->
+  <div class="onboard-step" id="step-2">
+    <div class="onboard-card">
+      <div class="onboard-step-indicator"><span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span></div>
+      <div class="onboard-step-num">Step 1 of 6</div>
+      <div class="onboard-q">What habit do you want to break?</div>
+      <div class="onboard-q-sub">Be honest — this is just between you and the app.</div>
+      <input type="text" id="setup-habit" placeholder="Type your habit or pick one below..." maxlength="100" oninput="checkOnboardStep(2)">
+      <div class="chips" style="margin-top:12px">
+        <div class="chip" onclick="pickHabit('Scrolling phone before bed')">📱 Phone before bed</div>
+        <div class="chip" onclick="pickHabit('Stress eating junk food')">🍟 Stress eating</div>
+        <div class="chip" onclick="pickHabit('Procrastinating on tasks')">⏳ Procrastinating</div>
+        <div class="chip" onclick="pickHabit('Vaping or smoking')">💨 Vaping/smoking</div>
+        <div class="chip" onclick="pickHabit('Pornography and lust')">🔒 Porn &amp; lust</div>
+        <div class="chip" onclick="pickHabit('Negative self-talk')">🧠 Negative self-talk</div>
+        <div class="chip" onclick="pickHabit('Drinking to unwind')">🍺 Drinking to unwind</div>
+        <div class="chip" onclick="pickHabit('Biting nails or skin picking')">✋ Nail biting</div>
+        <div class="chip" onclick="pickHabit('Impulse buying online')">🛒 Impulse buying</div>
+      </div>
+      <button class="onboard-next" id="next-2" onclick="goStep(3)" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: HOW LONG -->
+  <div class="onboard-step" id="step-3">
+    <div class="onboard-card">
+      <div class="onboard-step-indicator"><span class="step-dot done"></span><span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span></div>
+      <div class="onboard-step-num">Step 2 of 6</div>
+      <div class="onboard-q">How long has this habit been part of your life?</div>
+      <div class="onboard-q-sub">This helps us calibrate the right plan for you.</div>
+      <div class="onboard-option-list" id="duration-opts">
+        <div class="onboard-opt" onclick="pickDuration(this,'Less than 3 months')"><span class="opt-icon">🌱</span><div><div class="opt-label">Less than 3 months</div><div class="opt-sub">Early stage — great time to act</div></div></div>
+        <div class="onboard-opt" onclick="pickDuration(this,'3 to 12 months')"><span class="opt-icon">📅</span><div><div class="opt-label">3 to 12 months</div><div class="opt-sub">It's becoming ingrained — we can reverse it</div></div></div>
+        <div class="onboard-opt" onclick="pickDuration(this,'1 to 3 years')"><span class="opt-icon">🔄</span><div><div class="opt-label">1 to 3 years</div><div class="opt-sub">Deep loop — needs consistent daily work</div></div></div>
+        <div class="onboard-opt" onclick="pickDuration(this,'More than 3 years')"><span class="opt-icon">⛓️</span><div><div class="opt-label">More than 3 years</div><div class="opt-sub">Long-term — you need structure and accountability</div></div></div>
+      </div>
+      <button class="onboard-next" id="next-3" onclick="goStep(4)" disabled>Continue →</button>
+      <button class="onboard-back" onclick="goStep(2)">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: TRIGGERS -->
+  <div class="onboard-step" id="step-4">
+    <div class="onboard-card">
+      <div class="onboard-step-indicator"><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span></div>
+      <div class="onboard-step-num">Step 3 of 6</div>
+      <div class="onboard-q">What triggers this habit most?</div>
+      <div class="onboard-q-sub">Select all that apply — your urge tab will be personalised around these.</div>
+      <div class="onboard-trigger-grid" id="trigger-grid">
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Stress')">😤 Stress</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Boredom')">😑 Boredom</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Loneliness')">🥺 Loneliness</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Late at night')">🌙 Late at night</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Being alone')">🚪 Being alone</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Anxiety')">😰 Anxiety</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'After a hard day')">😓 Hard day</div>
+        <div class="onboard-trigger" onclick="toggleTrigger(this,'Phone or screen time')">📱 Screen time</div>
+      </div>
+      <button class="onboard-next" id="next-4" onclick="goStep(5)" disabled>Continue →</button>
+      <button class="onboard-back" onclick="goStep(3)">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: WHY -->
+  <div class="onboard-step" id="step-5">
+    <div class="onboard-card">
+      <div class="onboard-step-indicator"><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span></div>
+      <div class="onboard-step-num">Step 4 of 6</div>
+      <div class="onboard-q">Why do you want to stop?</div>
+      <div class="onboard-q-sub">This becomes your why wall — the reason that pulls you back when you're weak.</div>
+      <div class="onboard-option-list" id="why-opts">
+        <div class="onboard-opt" onclick="pickWhyNew(this,'my health')"><span class="opt-icon">💪</span><div><div class="opt-label">My health</div><div class="opt-sub">This habit is costing me physically</div></div></div>
+        <div class="onboard-opt" onclick="pickWhyNew(this,'my productivity')"><span class="opt-icon">🚀</span><div><div class="opt-label">My productivity</div><div class="opt-sub">It steals my time and focus</div></div></div>
+        <div class="onboard-opt" onclick="pickWhyNew(this,'my self-respect')"><span class="opt-icon">🧠</span><div><div class="opt-label">My self-respect</div><div class="opt-sub">I'm tired of letting myself down</div></div></div>
+        <div class="onboard-opt" onclick="pickWhyNew(this,'my relationships')"><span class="opt-icon">❤️</span><div><div class="opt-label">My relationships</div><div class="opt-sub">The people I love deserve better</div></div></div>
+        <div class="onboard-opt" onclick="pickWhyNew(this,'my faith')"><span class="opt-icon">✝️</span><div><div class="opt-label">My faith</div><div class="opt-sub">I want to honour God with my choices</div></div></div>
+        <div class="onboard-opt" onclick="pickWhyNew(this,'my future')"><span class="opt-icon">🌅</span><div><div class="opt-label">My future</div><div class="opt-sub">The person I want to become doesn't do this</div></div></div>
+      </div>
+      <button class="onboard-next" id="next-5" onclick="goStep(6)" disabled>Continue →</button>
+      <button class="onboard-back" onclick="goStep(4)">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: COMMITMENT -->
+  <div class="onboard-step" id="step-6">
+    <div class="onboard-card">
+      <div class="onboard-step-indicator"><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span><span class="step-dot"></span></div>
+      <div class="onboard-step-num">Step 5 of 6</div>
+      <div class="onboard-q">How committed are you?</div>
+      <div class="onboard-q-sub">Be honest. Your plan intensity is based on this.</div>
+      <div class="onboard-option-list" id="commit-opts">
+        <div class="onboard-opt" onclick="pickCommit(this,'trying')"><span class="opt-icon">🌱</span><div><div class="opt-label">I want to try</div><div class="opt-sub">Taking it one day at a time</div></div></div>
+        <div class="onboard-opt" onclick="pickCommit(this,'serious')"><span class="opt-icon">💪</span><div><div class="opt-label">I'm serious about this</div><div class="opt-sub">Done making excuses</div></div></div>
+        <div class="onboard-opt" onclick="pickCommit(this,'committed')"><span class="opt-icon">🔥</span><div><div class="opt-label">I'm fully committed</div><div class="opt-sub">Whatever it takes — I'm done</div></div></div>
+      </div>
+      <button class="onboard-next" id="next-6" onclick="goStep(7)" disabled>Continue →</button>
+      <button class="onboard-back" onclick="goStep(5)">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 7: NAME + USERNAME -->
+  <div class="onboard-step" id="step-7">
+    <div class="onboard-card">
+      <div class="onboard-step-indicator"><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span></div>
+      <div class="onboard-step-num">Step 6 of 6 — Almost there!</div>
+      <div class="onboard-q">Who are we building this for?</div>
+      <div class="onboard-q-sub">Your name and username let friends find and support you.</div>
+      <div class="field-label" style="margin-top:16px">Your name</div>
+      <input type="text" id="setup-name" placeholder="What should we call you?" maxlength="30" oninput="checkOnboardStep(7)">
+      <div class="field-label" style="margin-top:14px">Choose a @username</div>
+      <input type="text" id="setup-username" placeholder="e.g. alexj (letters, numbers, _)" maxlength="20">
+      <div class="username-hint" id="username-hint"></div>
+      <button class="onboard-cta" id="setup-btn" onclick="launchApp()" disabled style="margin-top:20px">Build my plan →</button>
+      <button class="onboard-back" onclick="goStep(6)">← Back</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- ═══════════════════════════════ MAIN APP ══════════════════════════════ -->
@@ -670,6 +873,7 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
   <div class="tabnav">
     <div class="tab active" onclick="showTab('home')"><span class="tab-icon">🏠</span>Home</div>
     <div class="tab" onclick="showTab('log')"><span class="tab-icon">📊</span>Progress</div>
+    <div class="tab" onclick="showTab('journal')"><span class="tab-icon">📓</span>Journal</div>
     <div class="tab" id="messages-tab" onclick="showTab('messages')"><span class="tab-icon">💬</span>Messages</div>
     <div class="tab" id="partner-tab" onclick="showTab('partner')"><span class="tab-icon">👥</span>Friends</div>
   </div>
@@ -714,6 +918,14 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
         </div>
       </div>
     </div>
+
+    <button class="view-plan-btn" onclick="showTab('plan')">
+      <div class="view-plan-icon">📋</div>
+      <div class="view-plan-text">
+        <div class="view-plan-title">Your Recovery Plan</div>
+        <div class="view-plan-sub">See your personalised week-by-week guide</div>
+      </div>
+    </button>
 
     <div class="quote-card" id="daily-quote">
       <div class="ai-loading"><div class="ai-dots"><span></span><span></span><span></span></div><span>Loading your daily quote...</span></div>
@@ -837,7 +1049,30 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
     </div>
   </div>
 
-  <!-- ── PROGRESS PAGE ── -->
+  <!-- ═══════════════════════ MILESTONE MODAL ════════════════════════ -->
+<div id="milestone-modal" style="display:none">
+  <div class="milestone-sheet">
+    <div class="milestone-icon" id="ms-icon"></div>
+    <div class="milestone-title" id="ms-title"></div>
+    <div class="milestone-days" id="ms-days"></div>
+    <div class="milestone-quote" id="ms-quote"></div>
+    <button class="milestone-btn" onclick="closeMilestoneModal()">Keep going 🔥</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PLAN REVEAL MODAL ══════════════════════ -->
+<div id="plan-modal" style="display:none">
+  <div class="plan-sheet">
+    <div class="plan-pill"></div>
+    <div class="plan-header-icon">📋</div>
+    <div class="plan-title">Your Personal Plan</div>
+    <div class="plan-sub" id="plan-sub"></div>
+    <div class="plan-cards" id="plan-cards"></div>
+    <button class="onboard-cta" onclick="closePlanModal()" style="margin-top:8px">Start Day 1 →</button>
+  </div>
+</div>
+
+<!-- ── PROGRESS PAGE ── -->
   <div class="page" id="page-log">
     <div style="background:var(--s1);border:1px solid var(--border2);border-radius:14px;padding:20px">
       <div class="section-title" style="margin-bottom:14px">This month</div>
@@ -862,7 +1097,33 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
     </div>
   </div>
 
-  <!-- ═══════════════════════════ MESSAGES PAGE ════════════════════════ -->
+    <!-- ── JOURNAL PAGE ── -->
+  <div class="page" id="page-journal">
+    <div class="journal-header">
+      <div class="journal-title">Urge Journal</div>
+      <div class="journal-sub">Write freely. Nobody else can see this.</div>
+    </div>
+    <div class="journal-write-card">
+      <div class="journal-prompt" id="journal-prompt"></div>
+      <textarea id="journal-entry" placeholder="Write what you're feeling right now..." rows="6" maxlength="2000"></textarea>
+      <div class="journal-actions">
+        <div class="journal-char-count" id="journal-char-count">0 / 2000</div>
+        <button class="journal-save-btn" onclick="saveJournalEntry()">Save entry</button>
+      </div>
+    </div>
+    <div id="journal-entries-list"></div>
+  </div>
+
+  <!-- ── PLAN PAGE ── -->
+  <div class="page" id="page-plan">
+    <div class="plan-page-header">
+      <div class="plan-page-title">Your Recovery Plan</div>
+      <div class="plan-page-sub" id="plan-page-sub"></div>
+    </div>
+    <div id="plan-page-content"></div>
+  </div>
+
+<!-- ═══════════════════════════ MESSAGES PAGE ════════════════════════ -->
   <div class="page" id="page-messages">
     <div class="msgs-header">
       <div class="msgs-title">Messages</div>
@@ -1470,7 +1731,93 @@ function toast(msg,type=''){
 
 /* ═══════════════════════════ SETUP ══════════════════════════════════ */
 
-// Plain function declarations — hoisted, globally accessible from onclick attributes
+/* ═══════════════════════════ ONBOARDING ════════════════════════════ */
+let _setupTriggers = [];
+let _setupDuration = '';
+let _setupCommit   = '';
+
+function goStep(n){
+  document.querySelectorAll('.onboard-step').forEach(el=>el.classList.remove('active'));
+  const step = document.getElementById('step-'+n);
+  if(step) step.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function checkOnboardStep(step){
+  if(step === 2){
+    const v = (document.getElementById('setup-habit')||{}).value||'';
+    const btn = document.getElementById('next-2');
+    if(btn) btn.disabled = v.trim().length < 3;
+  }
+  if(step === 7){
+    const name = (document.getElementById('setup-name')||{}).value||'';
+    const btn = document.getElementById('setup-btn');
+    if(btn) btn.disabled = name.trim().length < 1 || !_usernameOk;
+  }
+}
+
+function pickHabit(h){
+  const el=document.getElementById('setup-habit');
+  if(el){ el.value=h; }
+  const btn = document.getElementById('next-2');
+  if(btn) btn.disabled = false;
+  // Highlight selected chip
+  document.querySelectorAll('.chip').forEach(c=>c.style.borderColor='');
+}
+
+function pickDuration(el, val){
+  _setupDuration = val;
+  document.querySelectorAll('#duration-opts .onboard-opt').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  const btn = document.getElementById('next-3');
+  if(btn) btn.disabled = false;
+}
+
+function toggleTrigger(el, val){
+  el.classList.toggle('sel');
+  if(el.classList.contains('sel')){
+    if(!_setupTriggers.includes(val)) _setupTriggers.push(val);
+  } else {
+    _setupTriggers = _setupTriggers.filter(t=>t!==val);
+  }
+  const btn = document.getElementById('next-4');
+  if(btn) btn.disabled = _setupTriggers.length === 0;
+}
+
+function pickWhyNew(el, val){
+  state._why = val;
+  document.querySelectorAll('#why-opts .onboard-opt').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  const btn = document.getElementById('next-5');
+  if(btn) btn.disabled = false;
+}
+
+function pickCommit(el, val){
+  _setupCommit = val;
+  document.querySelectorAll('#commit-opts .onboard-opt').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  const btn = document.getElementById('next-6');
+  if(btn) btn.disabled = false;
+}
+
+// Keep old pickWhy for compatibility
+function pickWhy(el, w){
+  document.querySelectorAll('#why-grid .why-opt').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  state._why=w;
+  checkSetup();
+}
+
+function checkSetup(){
+  const h=document.getElementById('setup-habit');
+  const n=document.getElementById('setup-name');
+  const u=document.getElementById('setup-username');
+  const btn=document.getElementById('setup-btn');
+  if(!h||!n||!u||!btn) return;
+  btn.disabled=!(h.value.trim().length>2 && n.value.trim().length>0 && _usernameOk);
+}
+
+// Plain function declarations — globally accessible from onclick attributes
 function doReplace(i){
   const item=(window._replacers||[])[i];
   if(item) toast('Go! '+item.title+' — '+item.duration,'success');
@@ -1478,10 +1825,6 @@ function doReplace(i){
 function acceptIncoming(i){
   const r=(window._incomingReqs||[])[i];
   if(r) acceptRequest(r.fromId,r.fromName,r.fromUsername,r.fromHabit||'');
-}
-function pickHabit(h){
-  const el=document.getElementById('setup-habit');
-  if(el){ el.value=h; checkSetup(); }
 }
 function pickWhy(el,w){
   document.querySelectorAll('#why-grid .why-opt').forEach(e=>e.classList.remove('sel'));
@@ -1504,7 +1847,6 @@ function checkSetup(){
 
 function wireSetupListeners(){
   const uInput=document.getElementById('setup-username');
-  const hInput=document.getElementById('setup-habit');
   const nInput=document.getElementById('setup-name');
   if(!uInput) return;
 
@@ -1513,7 +1855,8 @@ function wireSetupListeners(){
     const hint=document.getElementById('username-hint');
     clearTimeout(usernameCheckTimeout);
     _usernameOk=false;
-    document.getElementById('setup-btn').disabled=true;
+    const btn = document.getElementById('setup-btn');
+    if(btn) btn.disabled=true;
     if(!val){ hint.textContent=''; return; }
     if(!/^[a-z0-9_]{3,20}$/.test(val)){
       hint.style.color='var(--orange)';
@@ -1525,22 +1868,19 @@ function wireSetupListeners(){
     usernameCheckTimeout=setTimeout(async function(){
       try{
         await storage.get('u_idx:'+val,true);
-        // no throw = key exists = taken
         _usernameOk=false;
         hint.style.color='var(--red)';
         hint.textContent='@'+val+' is taken';
       }catch(err){
-        // throw = key missing = available
         _usernameOk=true;
         hint.style.color='var(--green)';
         hint.textContent='@'+val+' is available!';
-        checkSetup();
+        checkOnboardStep(7);
       }
     },600);
   });
 
-  hInput.addEventListener('input',checkSetup);
-  nInput.addEventListener('input',checkSetup);
+  if(nInput) nInput.addEventListener('input', ()=>checkOnboardStep(7));
 }
 
 async function launchApp(){
@@ -1549,14 +1889,17 @@ async function launchApp(){
   const u=document.getElementById('setup-username').value.trim().toLowerCase();
   if(!h||!n||!u) return;
   const btn=document.getElementById('setup-btn');
-  btn.textContent='Setting up…'; btn.disabled=true;
+  btn.textContent='Building your plan…'; btn.disabled=true;
   try{
-    // Try to get — if it succeeds (no throw) the username is taken
     let taken = false;
     try { await storage.get('u_idx:'+u, true); taken=true; } catch(e) { taken=false; }
-    if(taken){ toast('@'+u+' was just taken. Try another name.'); btn.textContent='Start Breaking the Loop →'; btn.disabled=false; _usernameOk=false; return; }
+    if(taken){ toast('@'+u+' was just taken. Try another name.'); btn.textContent='Build my plan →'; btn.disabled=false; _usernameOk=false; return; }
     state.userId=genUID(); state.username=u; state.habit=h; state.name=n;
-    state.why=state._why||'my goals'; state.startDate=fmt(new Date());
+    state.why=state._why||'my goals';
+    state.duration  = _setupDuration  || 'Less than 3 months';
+    state.triggers  = _setupTriggers  || [];
+    state.commitment= _setupCommit    || 'serious';
+    state.startDate=fmt(new Date());
     state.days={}; state.urges=[]; state.friends=[]; state.pendingOut=[]; state.bestStreak=0;
     state.aiQuote=null; state.lastOpen=fmt(new Date()); state.lastRead={};
     try{ await storage.set('u_idx:'+u, state.userId, true); }catch(e){}
@@ -1564,6 +1907,8 @@ async function launchApp(){
     postActivity('started', {habit: state.habit});
     save();
     startMainApp();
+    // Show plan modal after a short delay
+    setTimeout(showPlanModal, 800);
   }catch(e){ save(); startMainApp(); }
 }
 
@@ -1585,6 +1930,7 @@ function startMainApp(){
   checkReEngagement();
   startPartnerPoll();
   checkPartnerAlerts();
+  checkIncomingRemovals();
   // Load message previews and show badge if there are unread messages
   loadConversationPreviews().then(()=>updateMessagesBadge());
   setInterval(renderHome, 60000);
@@ -1604,13 +1950,16 @@ function resetAll(){
 
 /* ═══════════════════════════ NAVIGATION ═════════════════════════════ */
 function showTab(t){
-  const tabs=['home','log','messages','partner'];
+  const tabs=['home','log','journal','messages','partner'];
   document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',tabs[i]===t));
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-  document.getElementById('page-'+t).classList.add('active');
+  const page = document.getElementById('page-'+t);
+  if(page) page.classList.add('active');
   currentTab=t;
   if(t==='urge'){ startUrgeTimer(); renderUrgeExtras(); }
   if(t==='log') renderLog();
+  if(t==='journal') renderJournalTab();
+  if(t==='plan') renderPlanPage();
   if(t==='messages') renderMessagesTab();
   if(t==='partner'){ renderFriendsTab(); startPartnerPoll(); }
   else { if(t!=='partner') stopPartnerPoll(); }
@@ -1644,7 +1993,7 @@ function renderHome(){
   renderMilestones(streak);
   renderCheckinCard();
   syncProfile();
-  // Post milestone activity if a milestone was just crossed
+  checkMilestones();
   const hit = MILESTONES.find(m=>m.days===streak && streak>prevBest);
   if(hit) postActivity('milestone', {label: hit.label, days: hit.days, icon: hit.icon});
 }
@@ -2255,6 +2604,14 @@ async function removeFriend(userId, displayName){
   try{ await storage.delete('req:'+userId+':'+state.userId, true); }catch(e){}
   try{ await storage.delete('accept:'+state.userId+':'+userId, true); }catch(e){}
   try{ await storage.delete('accept:'+userId+':'+state.userId, true); }catch(e){}
+  // Write a removal notification so the OTHER person's app removes us too
+  try{
+    await storage.set(
+      'removed:'+userId+':'+state.userId,
+      JSON.stringify({removedBy: state.userId, ts: Date.now()}),
+      true
+    );
+  }catch(e){}
   save();
   toast(displayName+' removed from friends.', '');
   renderFriendsList();
@@ -2558,13 +2915,52 @@ function startChatPoll(){
 }
 
 /* ═══════════════════════════ PARTNER POLL ═══════════════════════════ */
+/* ── CHECK IF WE'VE BEEN REMOVED BY SOMEONE ─────────────────────── */
+async function checkIncomingRemovals(){
+  if(!state.userId) return;
+  try{
+    const res = await storage.list('removed:'+state.userId+':', true);
+    if(!res || !res.keys || !res.keys.length) return;
+    let changed = false;
+    for(const key of res.keys){
+      try{
+        const r = await storage.get(key, true);
+        const data = JSON.parse(r.value);
+        const removerId = data.removedBy;
+        // Check if we still have them as a friend
+        if(state.friends.find(f => f.userId === removerId)){
+          const friend = state.friends.find(f => f.userId === removerId);
+          state.friends = state.friends.filter(f => f.userId !== removerId);
+          // Remove as AP if they were set
+          if(state.accountabilityPartner?.userId === removerId){
+            state.accountabilityPartner = null;
+          }
+          delete msgCache[removerId];
+          changed = true;
+          toast((friend?.displayName || 'Someone') + ' removed you as a friend.');
+        }
+        // Delete the notification key so it doesn't fire again
+        await storage.delete(key, true).catch(()=>{});
+      }catch(e){}
+    }
+    if(changed){
+      save();
+      renderFriendsList();
+      renderAPCard();
+      updateMessagesBadge();
+      if(currentTab === 'messages') renderMessagesTab();
+    }
+  }catch(e){}
+}
+
+
 function startPartnerPoll(){
   clearInterval(partnerPollTimer);
   partnerPollTimer=setInterval(async()=>{
     await checkAcceptedRequests();
+    await checkIncomingRemovals();
     await refreshFriendProfiles();
     await checkPartnerAlerts();
-    // Refresh message previews and badge in background
     await loadConversationPreviews();
     updateMessagesBadge();
     if(currentTab==='messages') renderMessagesTab();
@@ -3699,9 +4095,247 @@ window.removeAccountabilityPartner = removeAccountabilityPartner;
 window.dismissPartnerAlert = dismissPartnerAlert;
 window.openChatWithAlert = openChatWithAlert;
 
+/* ═══════════════════════════ JOURNAL ════════════════════════════════ */
+const JOURNAL_PROMPTS = [
+  "What triggered the urge today?",
+  "How did you feel right before the urge hit?",
+  "What did you do instead of giving in?",
+  "What would your future self say about today?",
+  "What's one thing you're proud of right now?",
+  "What pattern do you keep noticing in your triggers?",
+  "How are you feeling in your body right now?",
+  "What does freedom from this habit look like for you?",
+  "Who are you doing this for?",
+  "What's been the hardest part of today?",
+];
+
+function renderJournalTab(){
+  // Show a rotating daily prompt
+  const dayIdx = new Date().getDate() % JOURNAL_PROMPTS.length;
+  const promptEl = document.getElementById('journal-prompt');
+  if(promptEl) promptEl.textContent = '💭 ' + JOURNAL_PROMPTS[dayIdx];
+
+  // Char counter
+  const ta = document.getElementById('journal-entry');
+  const cc = document.getElementById('journal-char-count');
+  if(ta && cc){
+    ta.addEventListener('input', ()=>{
+      cc.textContent = ta.value.length + ' / 2000';
+    });
+  }
+
+  renderJournalEntries();
+}
+
+function saveJournalEntry(){
+  const ta = document.getElementById('journal-entry');
+  if(!ta || !ta.value.trim()) return;
+  const entry = {
+    id: Date.now(),
+    text: ta.value.trim(),
+    date: new Date().toISOString(),
+    prompt: document.getElementById('journal-prompt')?.textContent || '',
+  };
+  const entries = getJournalEntries();
+  entries.unshift(entry);
+  // Keep last 100
+  if(entries.length > 100) entries.splice(100);
+  localStorage.setItem('ulp_journal', JSON.stringify(entries));
+  ta.value = '';
+  document.getElementById('journal-char-count').textContent = '0 / 2000';
+  toast('Entry saved 📓', 'success');
+  renderJournalEntries();
+}
+
+function getJournalEntries(){
+  try{ return JSON.parse(localStorage.getItem('ulp_journal') || '[]'); }
+  catch(e){ return []; }
+}
+
+function deleteJournalEntry(id){
+  if(!confirm('Delete this entry?')) return;
+  const entries = getJournalEntries().filter(e=>e.id !== id);
+  localStorage.setItem('ulp_journal', JSON.stringify(entries));
+  renderJournalEntries();
+}
+window.deleteJournalEntry = deleteJournalEntry;
+
+function renderJournalEntries(){
+  const el = document.getElementById('journal-entries-list');
+  if(!el) return;
+  const entries = getJournalEntries();
+  if(!entries.length){
+    el.innerHTML = `<div class="journal-empty">No entries yet.<br><span style="font-size:12px;color:var(--muted2)">Write your first entry above — nobody else can see this.</span></div>`;
+    return;
+  }
+  el.innerHTML = `<div class="journal-section-title" style="margin-bottom:10px">Past entries</div>` +
+    entries.map(e=>{
+      const d = new Date(e.date);
+      const dateStr = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) + ' · ' + d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+      return `<div class="journal-entry-item" style="margin-bottom:8px">
+        <div class="journal-entry-date">${dateStr}</div>
+        <div class="journal-entry-text">${escHtml(e.text)}</div>
+        <button class="journal-entry-delete" onclick="deleteJournalEntry(${e.id})">Delete</button>
+      </div>`;
+    }).join('');
+}
+
+window.saveJournalEntry = saveJournalEntry;
+
+/* ═══════════════════════════ RECOVERY PLAN ══════════════════════════ */
+function generateRecoveryPlan(){
+  const habit     = state.habit || '';
+  const duration  = state.duration || 'Less than 3 months';
+  const commit    = state.commitment || 'serious';
+  const triggers  = state.triggers || [];
+  const why       = state.why || 'my goals';
+
+  // Intensity based on duration and commitment
+  const isDeep    = duration.includes('3 year') || duration.includes('1 to 3');
+  const isLong    = duration.includes('More than');
+  const isCommit  = commit === 'committed';
+
+  const plan = [
+    {
+      week: 'Week 1 — Awareness',
+      icon: '👁️',
+      title: 'Understand your loop',
+      desc: `Log every urge this week — don't try to stop them yet. Just notice the pattern. What time of day? What were you doing? Your triggers (${triggers.slice(0,2).join(', ') || 'stress, boredom'}) are your data.`,
+    },
+    {
+      week: 'Week 2 — Interrupt',
+      icon: '🛑',
+      title: 'Break the automatic response',
+      desc: `When an urge hits, wait 5 minutes before acting. Use the timer on the Urge tab. Your only job this week is to create a pause. That pause is everything.`,
+    },
+    {
+      week: 'Week 3 — Replace',
+      icon: '🔄',
+      title: 'Build your replacement habit',
+      desc: `Pick one dopamine replacer from the Urge tab and use it every single time. Same trigger, new response. Your brain will start rerouting automatically by day 21.`,
+    },
+    {
+      week: isDeep || isLong ? 'Week 4 — Accountability' : 'Week 4 — Solidify',
+      icon: isDeep || isLong ? '🛡️' : '💪',
+      title: isDeep || isLong ? 'Add social accountability' : 'Lock in the new pattern',
+      desc: isDeep || isLong
+        ? `Long-term habits need outside pressure. Add a friend and set an accountability partner this week. Knowing someone else is watching changes everything.`
+        : `Your replacement habit is starting to feel natural. This week focus on protecting your streak — remove triggers from your environment and tell someone what you're doing.`,
+    },
+    {
+      week: 'Week 5–8 — Build identity',
+      icon: '🌟',
+      title: `Become someone who doesn't do this`,
+      desc: `Stop saying "I'm trying to quit ${habit.split(' ')[0]}." Start saying "I don't do that anymore." The identity shift is the final piece. Your streak is proof that it's already true.`,
+    },
+  ];
+
+  if(isCommit){
+    plan.push({
+      week: 'Ongoing — Master mode',
+      icon: '👑',
+      title: 'Become the person you committed to',
+      desc: `You said you're fully committed. That means treating this like training — daily check-ins, weekly journal reviews, and celebrating every milestone. The habit doesn't own you anymore.`,
+    });
+  }
+
+  return plan;
+}
+
+function renderPlanPage(){
+  const plan = generateRecoveryPlan();
+  const sub  = document.getElementById('plan-page-sub');
+  const content = document.getElementById('plan-page-content');
+  if(sub) sub.textContent = `Built for you based on your habit, triggers, and commitment level.`;
+  if(content){
+    content.innerHTML = plan.map(p=>`
+      <div class="plan-week-section">
+        <div class="plan-week-label">${p.week}</div>
+        <div class="plan-item">
+          <div class="plan-item-icon">${p.icon}</div>
+          <div class="plan-item-body">
+            <div class="plan-item-title">${p.title}</div>
+            <div class="plan-item-desc">${p.desc}</div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function showPlanModal(){
+  const plan = generateRecoveryPlan();
+  const modal = document.getElementById('plan-modal');
+  const sub   = document.getElementById('plan-sub');
+  const cards = document.getElementById('plan-cards');
+  if(sub) sub.textContent = `Your ${plan.length}-phase plan based on your habit, triggers, and commitment.`;
+  if(cards){
+    cards.innerHTML = plan.slice(0,3).map(p=>`
+      <div class="plan-card">
+        <div class="plan-card-week">${p.week}</div>
+        <div class="plan-card-title">${p.icon} ${p.title}</div>
+        <div class="plan-card-desc">${p.desc}</div>
+      </div>`).join('');
+  }
+  if(modal) modal.style.display='flex'; setTimeout(()=>{ if(modal) modal.classList.add('open'); }, 10);
+}
+
+function closePlanModal(){
+  const modal = document.getElementById('plan-modal');
+  if(modal){ modal.classList.remove('open'); setTimeout(()=>{ modal.style.display='none'; }, 300); }
+}
+window.closePlanModal = closePlanModal;
+
+/* ═══════════════════════════ MILESTONE MODAL ════════════════════════ */
+const MILESTONE_QUOTES = {
+  1:  "Every journey starts with a single step. You just took yours.",
+  3:  "Three days in. The brain is already starting to rewire.",
+  7:  "One week. You just proved to yourself this is possible.",
+  14: "Two weeks clean. The loop is weakening. You're winning.",
+  21: "21 days — researchers say this is where new habits form. You're there.",
+  30: "One month. This is a different version of you now.",
+  60: "Two months. Most people quit before getting here. You didn't.",
+  90: "90 days. You are living proof that people can change.",
+};
+
+let _lastMilestoneShown = 0;
+
+function checkMilestones(){
+  const streak = getStreak();
+  const milestoneHit = MILESTONES.find(m => m.days === streak);
+  if(!milestoneHit) return;
+  if(streak === _lastMilestoneShown) return;
+  // Only show if this is a new high
+  if(streak <= (state.bestStreak - 1)) return;
+  _lastMilestoneShown = streak;
+  showMilestoneModal(milestoneHit);
+}
+
+function showMilestoneModal(milestone){
+  const modal = document.getElementById('milestone-modal');
+  document.getElementById('ms-icon').textContent  = milestone.icon;
+  document.getElementById('ms-title').textContent = milestone.label + ' — ' + (milestone.days === 1 ? 'Day 1 Complete!' : milestone.days + ' Days Clean!');
+  document.getElementById('ms-days').textContent  = 'Current streak: ' + getStreak() + ' days';
+  document.getElementById('ms-quote').textContent = MILESTONE_QUOTES[milestone.days] || 'Keep going. You\'re doing it.';
+  if(modal){ modal.style.display='flex'; setTimeout(()=>modal.classList.add('open'), 10); }
+}
+
+function closeMilestoneModal(){
+  const modal = document.getElementById('milestone-modal');
+  if(modal){ modal.classList.remove('open'); setTimeout(()=>{ modal.style.display='none'; }, 300); }
+}
+window.closeMilestoneModal = closeMilestoneModal;
+
 /* ═══════════════════════════ BOOT ═══════════════════════════════════ */
 // Re-assign after all functions defined (some were assigned before their async definition)
 window.launchApp = launchApp;
+window.goStep = goStep;
+window.pickHabit = pickHabit;
+window.pickDuration = pickDuration;
+window.toggleTrigger = toggleTrigger;
+window.pickWhyNew = pickWhyNew;
+window.pickCommit = pickCommit;
+window.checkOnboardStep = checkOnboardStep;
+window.showTab = showTab;
 
 load();
 wireSetupListeners();
