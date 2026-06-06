@@ -720,6 +720,154 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
 .view-plan-text{}
 .view-plan-title{font-family:var(--fd);font-size:14px;font-weight:800;color:var(--accent);letter-spacing:-.2px;margin-bottom:2px}
 .view-plan-sub{font-size:12px;color:var(--muted);font-weight:300}
+
+/* ═══════════ INSTAGRAM-STYLE NAV REDESIGN ═══════════ */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border)}
+.topbar-logo{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:-0.5px;color:var(--text);display:flex;align-items:center;gap:8px}
+.topbar-right{display:flex;align-items:center;gap:4px}
+.topbar-icon-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--muted3);border-radius:10px;transition:all .15s}
+.topbar-icon-btn svg{width:22px;height:22px}
+.topbar-icon-btn:hover{background:var(--s2);color:var(--text)}
+
+/* DROPDOWN */
+#dropdown-menu{position:fixed;top:58px;right:12px;background:var(--s1);border:1px solid var(--border2);border-radius:16px;z-index:200;min-width:210px;box-shadow:0 16px 40px rgba(0,0,0,.6);display:none;flex-direction:column;overflow:hidden;animation:fadeUp .2s ease}
+#dropdown-menu.open{display:flex}
+.dropdown-item{padding:13px 18px;font-size:14px;color:var(--text);cursor:pointer;transition:background .15s;font-weight:500;display:flex;align-items:center;gap:10px}
+.dropdown-item:hover{background:var(--s2)}
+.dropdown-item.danger{color:var(--red)}
+.dropdown-divider{height:1px;background:var(--border);margin:4px 0}
+
+/* BOTTOM NAV - Instagram style */
+.tabnav{display:flex;background:var(--bg);border-top:1px solid var(--border);position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:100;padding:8px 0 20px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px 0;color:var(--muted);transition:color .15s;position:relative}
+.tab svg{width:26px;height:26px;stroke:currentColor}
+.tab.active{color:var(--text)}
+.tab.active svg{stroke:var(--text)}
+.tab-badge{position:absolute;top:4px;right:calc(50% - 18px);background:var(--orange);color:#fff;font-size:9px;font-weight:800;min-width:15px;height:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-family:var(--fd);box-shadow:0 0 0 2px var(--bg)}
+
+/* CENTER URGE BUTTON */
+.urge-tab-btn{flex:1;display:flex;align-items:center;justify-content:center}
+.urge-center-btn{width:52px;height:52px;background:linear-gradient(135deg,var(--orange),#ff2020);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(255,92,32,.4);transition:all .15s;margin-top:-12px}
+.urge-center-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(255,92,32,.5)}
+.urge-center-btn:active{transform:scale(.96)}
+
+/* ═══════════ PLEDGE CARD ═══════════ */
+.pledge-card{background:linear-gradient(135deg,rgba(13,207,191,.1),rgba(13,207,191,.04));border:1px solid rgba(13,207,191,.25);border-radius:var(--card-r);padding:16px 18px;display:flex;align-items:center;gap:14px}
+.pledge-icon{font-size:28px;flex-shrink:0}
+.pledge-body{flex:1}
+.pledge-title{font-family:var(--fd);font-size:15px;font-weight:800;letter-spacing:-.2px;margin-bottom:2px}
+.pledge-sub{font-size:12px;color:var(--muted);font-weight:300}
+.pledge-btn{padding:9px 18px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:13px;font-weight:800;cursor:pointer;flex-shrink:0;transition:all .15s;letter-spacing:.3px}
+.pledge-btn:hover{filter:brightness(1.07)}
+.pledge-btn.pledged{background:var(--s2);color:var(--accent);border:1px solid rgba(13,207,191,.3)}
+
+/* ═══════════ MOOD TRACKER ═══════════ */
+.mood-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--card-r);padding:16px 18px}
+.mood-label{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:12px;letter-spacing:.3px}
+.mood-opts{display:flex;gap:6px;justify-content:space-between}
+.mood-opt{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border-radius:12px;border:1px solid var(--border);background:var(--s2);cursor:pointer;transition:all .15s;font-size:10px;color:var(--muted);font-weight:600}
+.mood-opt span{font-size:22px}
+.mood-opt:hover{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
+.mood-opt.selected{border-color:var(--accent);background:var(--accent-dim);color:var(--accent)}
+
+/* ═══════════ PROFILE PAGE ═══════════ */
+.profile-header{display:flex;flex-direction:column;align-items:center;padding:24px 0 16px;gap:10px}
+.profile-avatar-lg{width:80px;height:80px;border-radius:50%;background:var(--accent-dim);border:2px solid rgba(13,207,191,.3);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:28px;font-weight:800;color:var(--accent)}
+.profile-name{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:-.5px}
+.profile-handle{font-size:14px;color:var(--muted);font-weight:400}
+.profile-habit-tag{font-size:12px;padding:4px 12px;background:var(--accent-dim);border:1px solid rgba(13,207,191,.2);border-radius:20px;color:var(--accent);font-weight:600}
+.profile-stats-row{display:flex;gap:0;background:var(--s1);border:1px solid var(--border);border-radius:var(--card-r);overflow:hidden}
+.profile-stat{flex:1;padding:16px 8px;text-align:center;border-right:1px solid var(--border)}
+.profile-stat:last-child{border-right:none}
+.profile-stat-num{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-1px;color:var(--accent)}
+.profile-stat-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;font-weight:600}
+.profile-badges-section{display:flex;flex-direction:column;gap:10px}
+.profile-badges{display:flex;flex-wrap:wrap;gap:8px}
+.profile-badge{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--s1);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;color:var(--muted3)}
+.profile-badge.earned{border-color:rgba(13,207,191,.3);color:var(--accent);background:var(--accent-dim)}
+.profile-actions{display:flex;flex-direction:column;gap:8px}
+.profile-action-btn{padding:13px;background:var(--s1);border:1px solid var(--border2);border-radius:var(--rs);font-family:var(--fd);font-size:14px;font-weight:700;color:var(--muted3);cursor:pointer;transition:all .15s;text-align:left;letter-spacing:.2px}
+.profile-action-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.profile-action-btn.danger{color:var(--red)}
+.profile-action-btn.danger:hover{border-color:rgba(240,61,61,.3);background:var(--red-dim)}
+
+/* ═══════════ EMERGENCY PLAN ═══════════ */
+.emergency-plan-header{padding:4px 0 8px}
+.ep-title{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:4px}
+.ep-sub{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5}
+.ep-section{background:var(--s1);border:1px solid var(--border);border-radius:var(--card-r);padding:18px}
+.ep-section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.ep-steps{display:flex;flex-direction:column;gap:10px}
+.ep-step{display:flex;align-items:flex-start;gap:12px}
+.ep-step-num{width:28px;height:28px;border-radius:50%;background:var(--accent-dim);border:1px solid rgba(13,207,191,.3);color:var(--accent);font-family:var(--fd);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ep-step-text{font-size:14px;color:var(--text);line-height:1.5;padding-top:4px}
+.ep-statements{display:flex;flex-direction:column;gap:8px}
+.ep-statement{padding:12px 14px;background:var(--s2);border-radius:var(--rs);font-size:14px;color:var(--text);line-height:1.55;font-style:italic;border-left:3px solid var(--accent)}
+.ep-save-btn{padding:10px 20px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:13px;font-weight:800;cursor:pointer;transition:all .15s;margin-top:10px}
+.ep-save-btn:hover{filter:brightness(1.07)}
+.ep-relapse-card{background:linear-gradient(135deg,rgba(13,207,191,.06),rgba(13,207,191,.02));border:1px solid rgba(13,207,191,.15);border-radius:var(--rs);padding:16px}
+.ep-relapse-text{font-size:14px;color:var(--muted3);line-height:1.7;font-style:italic}
+.ep-section textarea{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:12px;color:var(--text);font-family:var(--fb);font-size:14px;outline:none;resize:none;transition:border-color .2s}
+.ep-section textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+
+/* ═══════════ HABIT TRACKER ═══════════ */
+.habits-header{padding:4px 0 8px}
+.habits-title{font-family:var(--fd);font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:4px}
+.habits-sub{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5}
+.habits-add-card{background:var(--s1);border:1px solid var(--border2);border-radius:var(--card-r);padding:18px;display:flex;flex-direction:column;gap:12px}
+.habit-frequency-row{display:flex;align-items:center;gap:10px}
+.freq-label{font-size:12px;color:var(--muted);font-weight:600;white-space:nowrap}
+.freq-opts{display:flex;gap:6px}
+.freq-opt{padding:5px 12px;border-radius:20px;border:1px solid var(--border2);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s;font-family:var(--fd)}
+.freq-opt:hover{border-color:var(--accent);color:var(--accent)}
+.freq-opt.sel{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.habits-add-btn{padding:11px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:14px;font-weight:800;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.habits-add-btn:hover{filter:brightness(1.07)}
+.habit-track-item{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .18s}
+.habit-track-item.completed{border-color:rgba(13,207,191,.25);background:var(--accent-dim)}
+.habit-check-btn{width:28px;height:28px;border-radius:50%;border:2px solid var(--border2);background:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s}
+.habit-check-btn.done{background:var(--accent);border-color:var(--accent);color:#071412}
+.habit-track-name{flex:1;font-size:14px;font-weight:600;color:var(--text)}
+.habit-track-name.done{text-decoration:line-through;color:var(--muted)}
+.habit-track-freq{font-size:10px;color:var(--muted2);font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.habit-track-delete{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:16px;padding:4px;transition:color .15s}
+.habit-track-delete:hover{color:var(--red)}
+.habit-track-streak{font-size:11px;color:var(--orange);font-weight:700;font-family:var(--fd)}
+
+/* ═══════════ EVENING REVIEW MODAL ═══════════ */
+#evening-review-modal{position:fixed;inset:0;z-index:280;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center}
+#evening-review-modal.open{display:flex;animation:fadeIn .25s ease}
+.er-sheet{background:var(--s1);border:1px solid var(--border2);border-radius:28px 28px 0 0;width:100%;max-width:520px;padding:20px 22px 48px;display:flex;flex-direction:column;gap:12px;max-height:92vh;overflow-y:auto;animation:slideUp .35s cubic-bezier(.22,1,.36,1)}
+.er-pill{width:36px;height:4px;background:var(--border3);border-radius:2px;margin:0 auto 4px}
+.er-icon{font-size:36px;text-align:center}
+.er-title{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:-.5px;text-align:center}
+.er-sub{font-size:13px;color:var(--muted);text-align:center;font-weight:300}
+.er-q{font-size:13px;font-weight:700;color:var(--muted3);letter-spacing:.2px;margin-top:4px}
+.er-sheet textarea{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:12px;color:var(--text);font-family:var(--fb);font-size:14px;outline:none;resize:none;transition:border-color .2s}
+.er-sheet textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.er-submit-btn{padding:14px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.er-submit-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.er-dismiss{background:none;border:none;color:var(--muted2);font-size:13px;cursor:pointer;font-family:var(--fb);text-align:center;padding:4px}
+
+/* ═══════════ SHARE REPORT MODAL ═══════════ */
+#share-report-modal{position:fixed;inset:0;z-index:280;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center}
+#share-report-modal.open{display:flex;animation:fadeIn .25s ease}
+.sr-sheet{background:var(--s1);border:1px solid var(--border2);border-radius:28px 28px 0 0;width:100%;max-width:520px;padding:24px 22px 48px;display:flex;flex-direction:column;gap:16px;animation:slideUp .35s cubic-bezier(.22,1,.36,1)}
+.sr-pill{width:36px;height:4px;background:var(--border3);border-radius:2px;margin:0 auto}
+.sr-title{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:-.5px;text-align:center}
+.sr-card{background:linear-gradient(135deg,var(--s2),var(--s3));border:1px solid var(--border2);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.sr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--orange),var(--purple))}
+.sr-card-logo{font-family:var(--fd);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.sr-card-name{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:-.5px}
+.sr-card-habit{font-size:13px;color:var(--muted);font-weight:300}
+.sr-stats-row{display:flex;gap:12px}
+.sr-stat{flex:1;text-align:center;background:var(--s1);border-radius:12px;padding:12px 8px}
+.sr-stat-num{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--accent)}
+.sr-stat-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;font-weight:600}
+.sr-card-date{font-size:10px;color:var(--muted2);font-weight:600;letter-spacing:1px}
+.sr-sub{font-size:13px;color:var(--muted);text-align:center;line-height:1.55;font-weight:300}
+.sr-close-btn{padding:14px;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer;color:var(--muted3);transition:all .15s}
+.sr-close-btn:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 </head>
 <body>
@@ -863,19 +1011,45 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
   <div class="topbar">
     <div class="topbar-logo"><div class="logo-mark"></div>Unloopd</div>
     <div class="topbar-right">
-      <span class="topbar-handle" id="topbar-handle"></span>
       <span id="topbar-plus-badge" style="display:none" class="plus-badge">✦ Plus</span>
-      <button class="topbar-feedback-btn" onclick="openFeedback()">Feedback</button>
-      <button class="topbar-reset" onclick="if(confirm('Reset all data? This cannot be undone.'))resetAll()">Reset</button>
+      <button class="topbar-icon-btn" onclick="openFeedback()" title="Feedback">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="topbar-icon-btn" onclick="toggleDropdown()" id="dropdown-trigger" title="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
+  </div>
+
+  <!-- DROPDOWN MENU -->
+  <div id="dropdown-menu">
+    <div class="dropdown-item" onclick="closeDropdown();showTab('journal')">📓 Journal</div>
+    <div class="dropdown-item" onclick="closeDropdown();showTab('plan')">📋 Recovery Plan</div>
+    <div class="dropdown-item" onclick="closeDropdown();showTab('partner')">👥 Friends</div>
+    <div class="dropdown-item" onclick="closeDropdown();showTab('emergency')">🚨 Emergency Plan</div>
+    <div class="dropdown-item" onclick="closeDropdown();showTab('habits')">✅ Habit Tracker</div>
+    <div class="dropdown-item" onclick="closeDropdown();showShareReport()">📊 Progress Report</div>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item" onclick="closeDropdown();openFeedback()">💬 Send Feedback</div>
+    <div class="dropdown-item danger" onclick="closeDropdown();if(confirm('Reset all data?'))resetAll()">🔄 Reset Account</div>
   </div>
   <div class="beta-banner">🧪 Beta v0.1 — thanks for testing! Your feedback shapes what's next.</div>
   <div class="tabnav">
-    <div class="tab active" onclick="showTab('home')"><span class="tab-icon">🏠</span>Home</div>
-    <div class="tab" onclick="showTab('log')"><span class="tab-icon">📊</span>Progress</div>
-    <div class="tab" onclick="showTab('journal')"><span class="tab-icon">📓</span>Journal</div>
-    <div class="tab" id="messages-tab" onclick="showTab('messages')"><span class="tab-icon">💬</span>Messages</div>
-    <div class="tab" id="partner-tab" onclick="showTab('partner')"><span class="tab-icon">👥</span>Friends</div>
+    <div class="tab active" id="tab-home" onclick="showTab('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="tab" id="tab-log" onclick="showTab('log')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </div>
+    <div class="tab urge-tab-btn" id="tab-urge-center" onclick="showTab('urge')">
+      <div class="urge-center-btn">⚡</div>
+    </div>
+    <div class="tab" id="tab-messages" onclick="showTab('messages')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="tab" id="tab-profile" onclick="showTab('profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
   </div>
 
   <!-- ── HOME PAGE ── -->
@@ -905,6 +1079,28 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
       <div class="section-title">Milestones</div>
       <div style="height:10px"></div>
       <div class="milestones" id="milestones-row"></div>
+    </div>
+
+    <!-- DAILY PLEDGE -->
+    <div class="pledge-card" id="pledge-card">
+      <div class="pledge-icon">🌅</div>
+      <div class="pledge-body">
+        <div class="pledge-title" id="pledge-title">Make your daily pledge</div>
+        <div class="pledge-sub" id="pledge-sub">Start today with intention.</div>
+      </div>
+      <button class="pledge-btn" id="pledge-btn" onclick="makePledge()">Pledge</button>
+    </div>
+
+    <!-- MOOD TRACKER -->
+    <div class="mood-card">
+      <div class="mood-label">How are you feeling right now?</div>
+      <div class="mood-opts" id="mood-opts">
+        <div class="mood-opt" onclick="logMood(this,'great','😄')"><span>😄</span><div>Great</div></div>
+        <div class="mood-opt" onclick="logMood(this,'good','🙂')"><span>🙂</span><div>Good</div></div>
+        <div class="mood-opt" onclick="logMood(this,'okay','😐')"><span>😐</span><div>Okay</div></div>
+        <div class="mood-opt" onclick="logMood(this,'low','😔')"><span>😔</span><div>Low</div></div>
+        <div class="mood-opt" onclick="logMood(this,'struggling','😰')"><span>😰</span><div>Struggling</div></div>
+      </div>
     </div>
 
     <div>
@@ -1049,7 +1245,46 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
     </div>
   </div>
 
-  <!-- ═══════════════════════ MILESTONE MODAL ════════════════════════ -->
+  <!-- ═══════════════════════ EVENING REVIEW MODAL ══════════════════════ -->
+<div id="evening-review-modal" style="display:none">
+  <div class="er-sheet">
+    <div class="er-pill"></div>
+    <div class="er-icon">🌙</div>
+    <div class="er-title">Evening Review</div>
+    <div class="er-sub">Take 60 seconds to reflect on today.</div>
+    <div class="er-q">What was your biggest win today?</div>
+    <textarea id="er-win" placeholder="Something you're proud of..." rows="2" maxlength="300"></textarea>
+    <div class="er-q">What was your biggest challenge?</div>
+    <textarea id="er-challenge" placeholder="What made it hard today..." rows="2" maxlength="300"></textarea>
+    <div class="er-q">What will you do differently tomorrow?</div>
+    <textarea id="er-tomorrow" placeholder="One thing to focus on..." rows="2" maxlength="300"></textarea>
+    <button class="er-submit-btn" onclick="submitEveningReview()">Save reflection →</button>
+    <button class="er-dismiss" onclick="closeEveningReview()">Maybe later</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SHARE REPORT MODAL ════════════════════════ -->
+<div id="share-report-modal" style="display:none">
+  <div class="sr-sheet">
+    <div class="sr-pill"></div>
+    <div class="sr-title">📊 Progress Report</div>
+    <div class="sr-card" id="sr-card">
+      <div class="sr-card-logo">Unloopd</div>
+      <div class="sr-card-name" id="sr-name"></div>
+      <div class="sr-card-habit" id="sr-habit"></div>
+      <div class="sr-stats-row">
+        <div class="sr-stat"><div class="sr-stat-num" id="sr-streak"></div><div class="sr-stat-label">Day Streak</div></div>
+        <div class="sr-stat"><div class="sr-stat-num" id="sr-clean"></div><div class="sr-stat-label">Clean Days</div></div>
+        <div class="sr-stat"><div class="sr-stat-num" id="sr-winrate"></div><div class="sr-stat-label">Win Rate</div></div>
+      </div>
+      <div class="sr-card-date" id="sr-date"></div>
+    </div>
+    <div class="sr-sub">Screenshot this to share with your accountability partner or therapist.</div>
+    <button class="sr-close-btn" onclick="closeShareReport()">Done</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MILESTONE MODAL ════════════════════════ -->
 <div id="milestone-modal" style="display:none">
   <div class="milestone-sheet">
     <div class="milestone-icon" id="ms-icon"></div>
@@ -1121,6 +1356,90 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
       <div class="plan-page-sub" id="plan-page-sub"></div>
     </div>
     <div id="plan-page-content"></div>
+  </div>
+
+<!-- ── PROFILE PAGE ── -->
+  <div class="page" id="page-profile">
+    <div class="profile-header">
+      <div class="profile-avatar-lg" id="profile-avatar-lg"></div>
+      <div class="profile-name" id="profile-name-display"></div>
+      <div class="profile-handle" id="profile-handle-display"></div>
+      <div class="profile-habit-tag" id="profile-habit-tag"></div>
+    </div>
+    <div class="profile-stats-row">
+      <div class="profile-stat"><div class="profile-stat-num" id="ps-streak">0</div><div class="profile-stat-label">Streak</div></div>
+      <div class="profile-stat"><div class="profile-stat-num" id="ps-clean">0</div><div class="profile-stat-label">Clean Days</div></div>
+      <div class="profile-stat"><div class="profile-stat-num" id="ps-urges">0</div><div class="profile-stat-label">Urges Won</div></div>
+      <div class="profile-stat"><div class="profile-stat-num" id="ps-best">0</div><div class="profile-stat-label">Best Streak</div></div>
+    </div>
+    <div class="profile-badges-section">
+      <div class="section-title">Badges earned</div>
+      <div class="profile-badges" id="profile-badges"></div>
+    </div>
+    <div class="profile-actions">
+      <button class="profile-action-btn" onclick="showTab('partner')">👥 Friends</button>
+      <button class="profile-action-btn" onclick="openPaywall()">✦ Upgrade to Plus</button>
+      <button class="profile-action-btn" onclick="openFeedback()">💬 Feedback</button>
+      <button class="profile-action-btn danger" onclick="if(confirm('Reset all data? This cannot be undone.'))resetAll()">Reset Account</button>
+    </div>
+  </div>
+
+  <!-- ── EMERGENCY PLAN PAGE ── -->
+  <div class="page" id="page-emergency">
+    <div class="emergency-plan-header">
+      <div class="ep-title">🚨 Emergency Plan</div>
+      <div class="ep-sub">Your personal crisis guide. Built by you, for your worst moments.</div>
+    </div>
+    <div class="ep-section">
+      <div class="ep-section-label">When I feel the urge, I will immediately:</div>
+      <div class="ep-steps">
+        <div class="ep-step"><div class="ep-step-num">1</div><div class="ep-step-text">Open the Urge tab and start the 5-minute timer</div></div>
+        <div class="ep-step"><div class="ep-step-num">2</div><div class="ep-step-text">Read my why wall</div></div>
+        <div class="ep-step"><div class="ep-step-num">3</div><div class="ep-step-text" id="ep-step-3">Do one dopamine replacer activity</div></div>
+        <div class="ep-step"><div class="ep-step-num">4</div><div class="ep-step-text" id="ep-step-4">Contact my accountability partner if still struggling</div></div>
+      </div>
+    </div>
+    <div class="ep-section">
+      <div class="ep-section-label">My personal coping statements</div>
+      <div class="ep-statements">
+        <div class="ep-statement" id="ep-s1"></div>
+        <div class="ep-statement" id="ep-s2"></div>
+        <div class="ep-statement" id="ep-s3"></div>
+      </div>
+    </div>
+    <div class="ep-section">
+      <div class="ep-section-label">Customize my emergency steps</div>
+      <textarea id="ep-custom-input" placeholder="Add your own step or reminder..." rows="3" maxlength="300"></textarea>
+      <button class="ep-save-btn" onclick="saveEmergencyNote()">Save note</button>
+      <div id="ep-custom-saved" style="font-size:13px;color:var(--muted);margin-top:8px"></div>
+    </div>
+    <div class="ep-section">
+      <div class="ep-section-label">If I relapse, I will remember:</div>
+      <div class="ep-relapse-card">
+        <div class="ep-relapse-text">A slip is not failure. It is data. I get back up immediately, log it honestly, and use what I learned. My streak can be rebuilt. My identity as someone who is changing cannot be taken away.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HABIT TRACKER PAGE ── -->
+  <div class="page" id="page-habits">
+    <div class="habits-header">
+      <div class="habits-title">Habit Tracker</div>
+      <div class="habits-sub">Track positive habits you're building alongside your recovery.</div>
+    </div>
+    <div class="habits-add-card">
+      <input type="text" id="new-habit-input" placeholder="e.g. Exercise, Read 10 pages, Meditate..." maxlength="60">
+      <div class="habit-frequency-row">
+        <div class="freq-label">Frequency:</div>
+        <div class="freq-opts">
+          <div class="freq-opt sel" onclick="selectFreq(this,'daily')">Daily</div>
+          <div class="freq-opt" onclick="selectFreq(this,'weekdays')">Weekdays</div>
+          <div class="freq-opt" onclick="selectFreq(this,'weekly')">Weekly</div>
+        </div>
+      </div>
+      <button class="habits-add-btn" onclick="addCustomHabit()">+ Add habit</button>
+    </div>
+    <div id="custom-habits-list"></div>
   </div>
 
 <!-- ═══════════════════════════ MESSAGES PAGE ════════════════════════ -->
@@ -1455,7 +1774,13 @@ let state = {
   lastOpen:null,
   lastRead:{},
   isPlusUser:false,
-  accountabilityPartner:null, // {userId,displayName,username}
+  accountabilityPartner:null,
+  mood:null,
+  customHabits:[],
+  pledgedToday:false,
+  pledgeDate:null,
+  eveningReviewed:false,
+  reviewDate:null,
 };
 
 let countdownTimer=null, timerSec=300;
@@ -1916,8 +2241,8 @@ async function launchApp(){
 function startMainApp(){
   document.getElementById('setup-screen').style.display='none';
   document.getElementById('main-app').classList.add('show');
-  document.getElementById('topbar-handle').textContent='@'+state.username;
-  document.getElementById('my-handle-display').textContent=state.username;
+  const handleEl = document.getElementById('my-handle-display');
+  if(handleEl) handleEl.textContent = state.username;
   if(state.isPlusUser){
     const badge=document.getElementById('topbar-plus-badge');
     if(badge) badge.style.display='inline-flex';
@@ -1931,9 +2256,18 @@ function startMainApp(){
   startPartnerPoll();
   checkPartnerAlerts();
   checkIncomingRemovals();
-  // Load message previews and show badge if there are unread messages
   loadConversationPreviews().then(()=>updateMessagesBadge());
+  // Prompt evening review after 3s if after 8pm
+  setTimeout(checkEveningReviewPrompt, 3000);
   setInterval(renderHome, 60000);
+}
+
+function checkEveningReviewPrompt(){
+  const hour = new Date().getHours();
+  const today = fmt(new Date());
+  if(hour >= 20 && state.reviewDate !== today){
+    openEveningReview();
+  }
 }
 
 function resetAll(){
@@ -1950,19 +2284,25 @@ function resetAll(){
 
 /* ═══════════════════════════ NAVIGATION ═════════════════════════════ */
 function showTab(t){
-  const tabs=['home','log','journal','messages','partner'];
-  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',tabs[i]===t));
+  const tabs=['home','log','urge','messages','profile'];
+  document.querySelectorAll('.tab').forEach((el,i)=>{
+    el.classList.toggle('active', tabs[i]===t);
+  });
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
   const page = document.getElementById('page-'+t);
   if(page) page.classList.add('active');
   currentTab=t;
-  if(t==='urge'){ startUrgeTimer(); renderUrgeExtras(); }
-  if(t==='log') renderLog();
+  if(t==='urge')    { startUrgeTimer(); renderUrgeExtras(); }
+  if(t==='log')     renderLog();
   if(t==='journal') renderJournalTab();
-  if(t==='plan') renderPlanPage();
-  if(t==='messages') renderMessagesTab();
-  if(t==='partner'){ renderFriendsTab(); startPartnerPoll(); }
-  else { if(t!=='partner') stopPartnerPoll(); }
+  if(t==='plan')    renderPlanPage();
+  if(t==='messages')renderMessagesTab();
+  if(t==='partner') { renderFriendsTab(); startPartnerPoll(); }
+  if(t==='profile') renderProfilePage();
+  if(t==='emergency')renderEmergencyPlan();
+  if(t==='habits')  renderHabitTracker();
+  if(t !== 'partner') stopPartnerPoll();
+  closeDropdown();
 }
 
 /* ═══════════════════════════ HOME ═══════════════════════════════════ */
@@ -1992,6 +2332,8 @@ function renderHome(){
   document.getElementById('urges-resisted').textContent=getUrgesResisted();
   renderMilestones(streak);
   renderCheckinCard();
+  renderPledgeCard();
+  renderMoodCard();
   syncProfile();
   checkMilestones();
   const hit = MILESTONES.find(m=>m.days===streak && streak>prevBest);
@@ -4325,6 +4667,332 @@ function closeMilestoneModal(){
 }
 window.closeMilestoneModal = closeMilestoneModal;
 
+/* ═══════════════════════════ DROPDOWN MENU ══════════════════════════ */
+function toggleDropdown(){
+  const menu = document.getElementById('dropdown-menu');
+  menu.classList.toggle('open');
+}
+function closeDropdown(){
+  document.getElementById('dropdown-menu').classList.remove('open');
+}
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('dropdown-menu');
+  const trigger = document.getElementById('dropdown-trigger');
+  if(menu && trigger && !menu.contains(e.target) && !trigger.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+window.toggleDropdown = toggleDropdown;
+window.closeDropdown = closeDropdown;
+
+/* ═══════════════════════════ DAILY PLEDGE ═══════════════════════════ */
+function renderPledgeCard(){
+  const today = fmt(new Date());
+  const pledged = state.pledgeDate === today;
+  const btn = document.getElementById('pledge-btn');
+  const title = document.getElementById('pledge-title');
+  const sub = document.getElementById('pledge-sub');
+  if(!btn || !title || !sub) return;
+  if(pledged){
+    btn.textContent = 'Pledged ✓';
+    btn.className = 'pledge-btn pledged';
+    title.textContent = 'Pledge made — stay strong today.';
+    sub.textContent = 'You committed this morning. Keep going.';
+  } else {
+    const hour = new Date().getHours();
+    if(hour >= 18){
+      // Evening — show review prompt instead
+      title.textContent = 'Evening Review';
+      sub.textContent = 'Take 60 seconds to reflect on today.';
+      btn.textContent = 'Reflect';
+      btn.onclick = openEveningReview;
+      btn.className = 'pledge-btn';
+    } else {
+      title.textContent = 'Make your daily pledge';
+      sub.textContent = 'Start today with intention.';
+      btn.textContent = 'Pledge';
+      btn.onclick = makePledge;
+      btn.className = 'pledge-btn';
+    }
+  }
+}
+
+function makePledge(){
+  const today = fmt(new Date());
+  state.pledgeDate = today;
+  state.pledgedToday = true;
+  save();
+  renderPledgeCard();
+  toast('Pledge made! Today you stay strong 💪', 'success');
+}
+window.makePledge = makePledge;
+
+/* ═══════════════════════════ MOOD TRACKER ═══════════════════════════ */
+function logMood(el, mood, emoji){
+  document.querySelectorAll('.mood-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  state.mood = {mood, emoji, date: fmt(new Date()), ts: Date.now()};
+  save();
+  // If struggling, prompt urge tab
+  if(mood === 'struggling'){
+    setTimeout(()=>{
+      toast('Feeling rough? The Urge tab has tools to help 💙');
+    }, 800);
+  }
+  toast('Mood logged ' + emoji);
+}
+window.logMood = logMood;
+
+function renderMoodCard(){
+  const today = fmt(new Date());
+  if(state.mood && state.mood.date === today){
+    document.querySelectorAll('.mood-opt').forEach(o => {
+      if(o.querySelector('span') && o.querySelector('span').textContent === state.mood.emoji){
+        o.classList.add('selected');
+      }
+    });
+  }
+}
+
+/* ═══════════════════════════ EVENING REVIEW ═════════════════════════ */
+function openEveningReview(){
+  const modal = document.getElementById('evening-review-modal');
+  ['er-win','er-challenge','er-tomorrow'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  if(modal){ modal.style.display='flex'; setTimeout(()=>modal.classList.add('open'),10); }
+}
+function closeEveningReview(){
+  const modal = document.getElementById('evening-review-modal');
+  if(modal){ modal.classList.remove('open'); setTimeout(()=>{ modal.style.display='none'; },300); }
+}
+async function submitEveningReview(){
+  const win       = (document.getElementById('er-win')||{}).value||'';
+  const challenge = (document.getElementById('er-challenge')||{}).value||'';
+  const tomorrow  = (document.getElementById('er-tomorrow')||{}).value||'';
+  const entry = {
+    date: fmt(new Date()),
+    ts: Date.now(),
+    win, challenge, tomorrow,
+    mood: state.mood?.mood || '—',
+    streak: getStreak(),
+  };
+  // Save to journal entries so it shows in the journal tab
+  const entries = getJournalEntries();
+  entries.unshift({
+    id: Date.now(),
+    text: `🌙 Evening Review\n\nWin: ${win||'—'}\nChallenge: ${challenge||'—'}\nTomorrow: ${tomorrow||'—'}`,
+    date: new Date().toISOString(),
+    prompt: '🌙 Evening review',
+  });
+  localStorage.setItem('ulp_journal', JSON.stringify(entries));
+  state.eveningReviewed = true;
+  state.reviewDate = fmt(new Date());
+  save();
+  closeEveningReview();
+  toast('Evening reflection saved 🌙', 'success');
+}
+window.openEveningReview = openEveningReview;
+window.closeEveningReview = closeEveningReview;
+window.submitEveningReview = submitEveningReview;
+
+/* ═══════════════════════════ SHARE REPORT ═══════════════════════════ */
+function showShareReport(){
+  const modal = document.getElementById('share-report-modal');
+  const total = state.urges.length;
+  const won   = state.urges.filter(u=>!u.relapsed).length;
+  document.getElementById('sr-name').textContent  = state.name || '—';
+  document.getElementById('sr-habit').textContent = 'Breaking: ' + (state.habit||'—');
+  document.getElementById('sr-streak').textContent = getStreak();
+  document.getElementById('sr-clean').textContent  = getCleanDays();
+  document.getElementById('sr-winrate').textContent = total ? Math.round(won/total*100)+'%' : '—';
+  document.getElementById('sr-date').textContent   = 'Generated ' + new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  if(modal){ modal.style.display='flex'; setTimeout(()=>modal.classList.add('open'),10); }
+}
+function closeShareReport(){
+  const modal = document.getElementById('share-report-modal');
+  if(modal){ modal.classList.remove('open'); setTimeout(()=>{ modal.style.display='none'; },300); }
+}
+window.showShareReport  = showShareReport;
+window.closeShareReport = closeShareReport;
+
+/* ═══════════════════════════ PROFILE PAGE ═══════════════════════════ */
+function renderProfilePage(){
+  const streak   = getStreak();
+  const clean    = getCleanDays();
+  const urgesWon = getUrgesResisted();
+
+  // Avatar initials
+  const avatarEl = document.getElementById('profile-avatar-lg');
+  if(avatarEl) avatarEl.textContent = initials(state.name||'?');
+
+  const nameEl = document.getElementById('profile-name-display');
+  if(nameEl) nameEl.textContent = state.name || '—';
+
+  const handleEl = document.getElementById('profile-handle-display');
+  if(handleEl) handleEl.textContent = '@' + (state.username||'—');
+
+  const habitEl = document.getElementById('profile-habit-tag');
+  if(habitEl) habitEl.textContent = state.habit || '—';
+
+  // Stats
+  ['ps-streak','ps-clean','ps-urges','ps-best'].forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = [streak, clean, urgesWon, state.bestStreak][i];
+  });
+
+  // Badges
+  const badgesEl = document.getElementById('profile-badges');
+  if(badgesEl){
+    const BADGES = [
+      {icon:'⚡', label:'Day 1',      earned: streak >= 1},
+      {icon:'🔥', label:'3 Days',     earned: state.bestStreak >= 3},
+      {icon:'💪', label:'1 Week',     earned: state.bestStreak >= 7},
+      {icon:'🧠', label:'2 Weeks',    earned: state.bestStreak >= 14},
+      {icon:'⭐', label:'21 Days',    earned: state.bestStreak >= 21},
+      {icon:'🏆', label:'1 Month',    earned: state.bestStreak >= 30},
+      {icon:'💎', label:'2 Months',   earned: state.bestStreak >= 60},
+      {icon:'👑', label:'90 Days',    earned: state.bestStreak >= 90},
+      {icon:'🛡️', label:'10 Urges Won', earned: urgesWon >= 10},
+      {icon:'📓', label:'5 Journal Entries', earned: getJournalEntries().length >= 5},
+      {icon:'👥', label:'First Friend', earned: state.friends.length >= 1},
+    ];
+    badgesEl.innerHTML = BADGES.map(b=>`
+      <div class="profile-badge ${b.earned?'earned':''}">
+        ${b.icon} ${b.label} ${b.earned?'':'🔒'}
+      </div>`).join('');
+  }
+}
+
+/* ═══════════════════════════ EMERGENCY PLAN ════════════════════════ */
+function renderEmergencyPlan(){
+  const why = state.why || 'my goals';
+  const name = state.name || 'you';
+  const habit = state.habit || 'this habit';
+
+  // Personalised coping statements
+  const statements = [
+    `I am breaking ${habit} for ${why}. That reason is bigger than this urge.`,
+    `This feeling will pass in under 5 minutes. I just need to hold on.`,
+    `Every time I resist, I become the person I want to be. Every time I give in, I stay stuck.`,
+  ];
+
+  ['ep-s1','ep-s2','ep-s3'].forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = statements[i];
+  });
+
+  // Load saved note
+  const saved = localStorage.getItem('ulp_emergency_note') || '';
+  const savedEl = document.getElementById('ep-custom-saved');
+  if(savedEl && saved) savedEl.textContent = '📌 ' + saved;
+}
+
+function saveEmergencyNote(){
+  const input = document.getElementById('ep-custom-input');
+  if(!input || !input.value.trim()) return;
+  localStorage.setItem('ulp_emergency_note', input.value.trim());
+  const savedEl = document.getElementById('ep-custom-saved');
+  if(savedEl) savedEl.textContent = '📌 ' + input.value.trim();
+  input.value = '';
+  toast('Note saved to your emergency plan ✓', 'success');
+}
+window.saveEmergencyNote = saveEmergencyNote;
+
+/* ═══════════════════════════ CUSTOM HABIT TRACKER ══════════════════ */
+let selectedFreq = 'daily';
+
+function selectFreq(el, freq){
+  selectedFreq = freq;
+  document.querySelectorAll('.freq-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+window.selectFreq = selectFreq;
+
+function addCustomHabit(){
+  const input = document.getElementById('new-habit-input');
+  if(!input || !input.value.trim()){ toast('Enter a habit name first'); return; }
+  const habit = {
+    id: Date.now(),
+    name: input.value.trim(),
+    freq: selectedFreq,
+    streak: 0,
+    completedDates: [],
+    createdAt: fmt(new Date()),
+  };
+  state.customHabits = state.customHabits || [];
+  state.customHabits.push(habit);
+  save();
+  input.value = '';
+  toast(habit.name + ' added! ✓', 'success');
+  renderHabitTracker();
+}
+window.addCustomHabit = addCustomHabit;
+
+function toggleCustomHabit(id){
+  const today = fmt(new Date());
+  const habit = (state.customHabits||[]).find(h=>h.id===id);
+  if(!habit) return;
+  if(habit.completedDates.includes(today)){
+    habit.completedDates = habit.completedDates.filter(d=>d!==today);
+  } else {
+    habit.completedDates.push(today);
+    // Update streak
+    let streak = 0;
+    const now = new Date();
+    for(let i=0;i<365;i++){
+      const d = new Date(now); d.setDate(d.getDate()-i);
+      if(habit.completedDates.includes(fmt(d))){ streak++; }
+      else if(i > 0){ break; }
+    }
+    habit.streak = streak;
+    if(habit.completedDates.length === 1) toast('First time completing ' + habit.name + '! 🎉', 'success');
+  }
+  save();
+  renderHabitTracker();
+}
+window.toggleCustomHabit = toggleCustomHabit;
+
+function deleteCustomHabit(id){
+  if(!confirm('Delete this habit?')) return;
+  state.customHabits = (state.customHabits||[]).filter(h=>h.id!==id);
+  save();
+  renderHabitTracker();
+}
+window.deleteCustomHabit = deleteCustomHabit;
+
+function renderHabitTracker(){
+  const el = document.getElementById('custom-habits-list');
+  if(!el) return;
+  const habits = state.customHabits || [];
+  if(!habits.length){
+    el.innerHTML = `<div class="empty-state" style="padding:32px 20px;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">✅</div>
+      <div style="font-family:var(--fd);font-size:16px;font-weight:800;margin-bottom:8px">No habits yet</div>
+      <div style="color:var(--muted2);font-size:13px">Add a positive habit above to start tracking it daily.</div>
+    </div>`;
+    return;
+  }
+  const today = fmt(new Date());
+  el.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">` +
+    habits.map(h=>{
+      const done = h.completedDates.includes(today);
+      return `<div class="habit-track-item ${done?'completed':''}">
+        <button class="habit-check-btn ${done?'done':''}" onclick="toggleCustomHabit(${h.id})">
+          ${done ? '✓' : ''}
+        </button>
+        <div style="flex:1">
+          <div class="habit-track-name ${done?'done':''}">${escHtml(h.name)}</div>
+          <div class="habit-track-freq">${h.freq} ${h.streak > 1 ? '· <span class="habit-track-streak">🔥 '+h.streak+' day streak</span>' : ''}</div>
+        </div>
+        <button class="habit-track-delete" onclick="deleteCustomHabit(${h.id})">×</button>
+      </div>`;
+    }).join('') + '</div>';
+}
+
+/* ═════════════════════════ UPDATE showTab ═══════════════════════════ */
+
 /* ═══════════════════════════ BOOT ═══════════════════════════════════ */
 // Re-assign after all functions defined (some were assigned before their async definition)
 window.launchApp = launchApp;
@@ -4336,6 +5004,8 @@ window.pickWhyNew = pickWhyNew;
 window.pickCommit = pickCommit;
 window.checkOnboardStep = checkOnboardStep;
 window.showTab = showTab;
+window.renderPledgeCard = renderPledgeCard;
+window.renderMoodCard = renderMoodCard;
 
 load();
 wireSetupListeners();
