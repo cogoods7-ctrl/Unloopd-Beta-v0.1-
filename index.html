@@ -868,6 +868,33 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
 .sr-sub{font-size:13px;color:var(--muted);text-align:center;line-height:1.55;font-weight:300}
 .sr-close-btn{padding:14px;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer;color:var(--muted3);transition:all .15s}
 .sr-close-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── MESSAGE CHOICE MODAL ── */
+.msg-choice-sheet{background:var(--s1);border:1px solid var(--border2);border-radius:28px 28px 0 0;width:100%;max-width:520px;padding:20px 22px 48px;display:flex;flex-direction:column;gap:12px;animation:slideUp .35s cubic-bezier(.22,1,.36,1)}
+.msg-choice-pill{width:36px;height:4px;background:var(--border3);border-radius:2px;margin:0 auto 4px}
+.msg-choice-name{font-family:var(--fd);font-size:20px;font-weight:800;letter-spacing:-.5px;text-align:center}
+.msg-choice-sub{font-size:13px;color:var(--muted);text-align:center;font-weight:300;margin-bottom:4px}
+.msg-choice-btn{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:16px;border:1px solid var(--border2);background:var(--s2);cursor:pointer;transition:all .18s;text-align:left;width:100%}
+.msg-choice-btn span{font-size:28px;flex-shrink:0}
+.msg-choice-btn:hover{transform:translateY(-2px)}
+.msg-choice-btn.inapp{border-color:rgba(13,207,191,.3)}
+.msg-choice-btn.inapp:hover{background:var(--accent-dim);border-color:var(--accent)}
+.msg-choice-btn.sms{border-color:rgba(45,216,152,.25)}
+.msg-choice-btn.sms:hover{background:var(--green-dim);border-color:var(--green)}
+.msg-choice-btn-title{font-family:var(--fd);font-size:15px;font-weight:800;letter-spacing:-.2px;margin-bottom:2px;color:var(--text)}
+.msg-choice-btn-sub{font-size:12px;color:var(--muted);font-weight:300}
+.msg-choice-dismiss{background:none;border:none;color:var(--muted2);font-size:13px;cursor:pointer;font-family:var(--fb);padding:4px;text-align:center;transition:color .15s}
+.msg-choice-dismiss:hover{color:var(--muted)}
+
+/* ── ADD PHONE MODAL ── */
+.add-phone-sheet{background:var(--s1);border:1px solid var(--border2);border-radius:24px;width:100%;max-width:400px;padding:32px 24px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;animation:popIn .35s cubic-bezier(.34,1.56,.64,1)}
+.add-phone-icon{font-size:48px}
+.add-phone-title{font-family:var(--fd);font-size:22px;font-weight:800;letter-spacing:-.5px}
+.add-phone-sub{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;max-width:300px}
+.add-phone-save-btn{padding:13px 24px;background:var(--accent);color:#071412;border:none;border-radius:var(--rs);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer;width:100%;transition:all .15s;letter-spacing:.3px;margin-top:4px}
+.add-phone-save-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.add-phone-dismiss{background:none;border:none;color:var(--muted2);font-size:13px;cursor:pointer;font-family:var(--fb);padding:4px;transition:color .15s}
+.add-phone-dismiss:hover{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -993,12 +1020,15 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
       <div class="onboard-step-indicator"><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span></div>
       <div class="onboard-step-num">Step 6 of 6 — Almost there!</div>
       <div class="onboard-q">Who are we building this for?</div>
-      <div class="onboard-q-sub">Your name and username let friends find and support you.</div>
+      <div class="onboard-q-sub">Your name, username, and phone number let friends find and support you.</div>
       <div class="field-label" style="margin-top:16px">Your name</div>
       <input type="text" id="setup-name" placeholder="What should we call you?" maxlength="30" oninput="checkOnboardStep(7)">
       <div class="field-label" style="margin-top:14px">Choose a @username</div>
       <input type="text" id="setup-username" placeholder="e.g. alexj (letters, numbers, _)" maxlength="20">
       <div class="username-hint" id="username-hint"></div>
+      <div class="field-label" style="margin-top:14px">Phone number <span style="color:var(--muted);font-weight:400;font-size:11px">(optional — for SMS alerts to your accountability partner)</span></div>
+      <input type="tel" id="setup-phone" placeholder="e.g. +1 555 123 4567" maxlength="20">
+      <div style="font-size:11px;color:var(--muted2);margin-top:6px;line-height:1.5">Your number is stored privately on your device. It's only used to send SMS check-ins when your partner needs support.</div>
       <button class="onboard-cta" id="setup-btn" onclick="launchApp()" disabled style="margin-top:20px">Build my plan →</button>
       <button class="onboard-back" onclick="goStep(6)">← Back</button>
     </div>
@@ -1013,7 +1043,7 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
     <div class="topbar-right">
       <span id="topbar-plus-badge" style="display:none" class="plus-badge">✦ Plus</span>
       <button class="topbar-icon-btn" onclick="openFeedback()" title="Feedback">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       </button>
       <button class="topbar-icon-btn" onclick="toggleDropdown()" id="dropdown-trigger" title="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -1378,6 +1408,7 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
     </div>
     <div class="profile-actions">
       <button class="profile-action-btn" onclick="showTab('partner')">👥 Friends</button>
+      <button class="profile-action-btn" onclick="openAddPhone()">📱 Add / Update Phone Number</button>
       <button class="profile-action-btn" onclick="openPaywall()">✦ Upgrade to Plus</button>
       <button class="profile-action-btn" onclick="openFeedback()">💬 Feedback</button>
       <button class="profile-action-btn danger" onclick="if(confirm('Reset all data? This cannot be undone.'))resetAll()">Reset Account</button>
@@ -1543,6 +1574,42 @@ input::placeholder,textarea::placeholder{color:var(--muted2)}
 
     <button class="fb-submit-btn" id="fb-submit-btn" onclick="submitFeedback()">Send feedback →</button>
     <button class="fb-dismiss" onclick="closeFeedback()">Maybe later</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ MESSAGE CHOICE MODAL ══════════════════════════ -->
+<div id="msg-choice-modal" onclick="if(event.target===this)closeMsgChoice()" style="position:fixed;inset:0;z-index:290;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center">
+  <div class="msg-choice-sheet">
+    <div class="msg-choice-pill"></div>
+    <div class="msg-choice-name" id="msg-choice-name"></div>
+    <div class="msg-choice-sub">How do you want to reach out?</div>
+    <button class="msg-choice-btn inapp" id="msg-choice-inapp" onclick="closeMsgChoice();_pendingChatId&&openChatWith(_pendingChatId)">
+      <span>💬</span>
+      <div>
+        <div class="msg-choice-btn-title">Message in app</div>
+        <div class="msg-choice-btn-sub">Chat inside Unloopd</div>
+      </div>
+    </button>
+    <button class="msg-choice-btn sms" id="msg-choice-sms" onclick="closeMsgChoice();sendSMSToFriend()">
+      <span>📱</span>
+      <div>
+        <div class="msg-choice-btn-title">Send a text message</div>
+        <div class="msg-choice-btn-sub" id="msg-choice-sms-sub">Opens your phone's messaging app</div>
+      </div>
+    </button>
+    <button class="msg-choice-dismiss" onclick="closeMsgChoice()">Cancel</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ ADD PHONE NUMBER MODAL ════════════════════════ -->
+<div id="add-phone-modal" onclick="if(event.target===this)closeAddPhone()" style="position:fixed;inset:0;z-index:290;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px">
+  <div class="add-phone-sheet">
+    <div class="add-phone-icon">📱</div>
+    <div class="add-phone-title">Add your phone number</div>
+    <div class="add-phone-sub">This lets your accountability partner reach you by text when you need support. Stored privately on your device.</div>
+    <input type="tel" id="add-phone-input" placeholder="+1 555 123 4567" maxlength="20" style="width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--rs);padding:13px 15px;color:var(--text);font-family:var(--fb);font-size:16px;outline:none;transition:border-color .2s;margin-top:4px">
+    <button class="add-phone-save-btn" onclick="savePhoneNumber()">Save number</button>
+    <button class="add-phone-dismiss" onclick="closeAddPhone()">Maybe later</button>
   </div>
 </div>
 
@@ -1775,6 +1842,8 @@ let state = {
   lastRead:{},
   isPlusUser:false,
   accountabilityPartner:null,
+  phone:'',
+  partnerPhone:'',
   mood:null,
   customHabits:[],
   pledgedToday:false,
@@ -2224,6 +2293,7 @@ async function launchApp(){
     state.duration  = _setupDuration  || 'Less than 3 months';
     state.triggers  = _setupTriggers  || [];
     state.commitment= _setupCommit    || 'serious';
+    state.phone     = (document.getElementById('setup-phone')?.value||'').trim();
     state.startDate=fmt(new Date());
     state.days={}; state.urges=[]; state.friends=[]; state.pendingOut=[]; state.bestStreak=0;
     state.aiQuote=null; state.lastOpen=fmt(new Date()); state.lastRead={};
@@ -2259,6 +2329,8 @@ function startMainApp(){
   loadConversationPreviews().then(()=>updateMessagesBadge());
   // Prompt evening review after 3s if after 8pm
   setTimeout(checkEveningReviewPrompt, 3000);
+  // Prompt existing users to add phone number
+  setTimeout(checkPhonePrompt, 6000);
   setInterval(renderHome, 60000);
 }
 
@@ -2463,7 +2535,8 @@ function logUrge(relapsed){
   selectedTrigger=''; document.querySelectorAll('.t-opt').forEach(e=>e.classList.remove('sel'));
   syncProfile();
   postActivity(relapsed?'urge_lost':'urge_won', {trigger: entry.trigger});
-  if(relapsed) notifyPartnerOfSlip();
+  if(relapsed){ notifyPartnerOfSlip(); }
+  else { notifyPartnerOfUrge(); }
   // Stop timer and redirect home
   clearInterval(countdownTimer);
   showTab('home');
@@ -2519,7 +2592,8 @@ async function syncProfile(){
     await storage.set('profile:'+state.userId, JSON.stringify({
       userId:state.userId, username:state.username, displayName:state.name,
       habit:state.habit, streak, cleanDays:getCleanDays(),
-      urgesWon:getUrgesResisted(), lastActive:new Date().toISOString()
+      urgesWon:getUrgesResisted(), lastActive:new Date().toISOString(),
+      phone: state.phone || '',
     }), true);
   }catch(e){ console.warn('Profile sync failed',e); }
 }
@@ -2841,6 +2915,7 @@ async function refreshFriendProfiles(){
       const p=JSON.parse(r.value);
       state.friends[i].streak=p.streak||0;
       state.friends[i].habit=p.habit||state.friends[i].habit;
+      state.friends[i].phone=p.phone||'';
     }catch(e){}
   }
   save();
@@ -2900,7 +2975,7 @@ function renderFriendsList(){
     const isAP = f.userId === apId;
     const unread = hasUnread(f.userId);
     const chatBtn = state.isPlusUser
-      ? `<button class="friend-chat-btn" onclick="openChatWith('${f.userId}')">Chat →</button>`
+      ? `<button class="friend-chat-btn" onclick="openMessageChoice('${f.userId}')">Message →</button>`
       : `<button class="plus-lock-btn" onclick="openPaywall()">✦ Chat</button>`;
     const apBtn = isAP
       ? `<span class="is-ap-badge">✦ Partner</span>`
@@ -4992,6 +5067,134 @@ function renderHabitTracker(){
 }
 
 /* ═════════════════════════ UPDATE showTab ═══════════════════════════ */
+
+/* ═══════════════════════════ PHONE NUMBER ═══════════════════════════ */
+function openAddPhone(){
+  const modal = document.getElementById('add-phone-modal');
+  const input = document.getElementById('add-phone-input');
+  if(input) input.value = state.phone || '';
+  if(modal){ modal.style.display='flex'; setTimeout(()=>modal.classList.add('open'),10); }
+}
+function closeAddPhone(){
+  const modal = document.getElementById('add-phone-modal');
+  if(modal){ modal.classList.remove('open'); setTimeout(()=>{ modal.style.display='none'; },300); }
+}
+function savePhoneNumber(){
+  const input = document.getElementById('add-phone-input');
+  if(!input || !input.value.trim()){ toast('Please enter a phone number'); return; }
+  state.phone = input.value.trim();
+  save();
+  closeAddPhone();
+  toast('Phone number saved ✓', 'success');
+  // Also sync to Firebase profile so accountability partner can see it
+  syncProfile();
+}
+window.openAddPhone  = openAddPhone;
+window.closeAddPhone = closeAddPhone;
+window.savePhoneNumber = savePhoneNumber;
+
+// Prompt existing users (who signed up before phone was added) to add their number
+function checkPhonePrompt(){
+  if(!state.phone && state.startDate && state.startDate < '2025-01-01'){
+    // Old account — show prompt after 5 seconds
+    setTimeout(openAddPhone, 5000);
+  } else if(!state.phone){
+    // New account but skipped — show after 10 seconds once
+    const shownKey = 'ulp_phone_prompt_shown';
+    if(!localStorage.getItem(shownKey)){
+      localStorage.setItem(shownKey, '1');
+      setTimeout(openAddPhone, 10000);
+    }
+  }
+}
+
+/* ═══════════════════════════ MESSAGE CHOICE ═════════════════════════ */
+let _pendingChatId   = null;
+let _pendingChatName = null;
+let _pendingChatPhone = null;
+
+function openMessageChoice(friendId){
+  const friend = state.friends.find(f=>f.userId===friendId);
+  if(!friend) return;
+  _pendingChatId    = friendId;
+  _pendingChatName  = friend.displayName;
+  _pendingChatPhone = friend.phone || '';
+
+  const modal = document.getElementById('msg-choice-modal');
+  const nameEl = document.getElementById('msg-choice-name');
+  const smsSub = document.getElementById('msg-choice-sms-sub');
+  const smsBtn = document.getElementById('msg-choice-sms');
+
+  if(nameEl) nameEl.textContent = friend.displayName;
+  if(smsSub){
+    smsSub.textContent = _pendingChatPhone
+      ? 'Text ' + _pendingChatPhone
+      : 'No phone number on file for this friend';
+  }
+  if(smsBtn) smsBtn.disabled = !_pendingChatPhone;
+
+  if(modal){ modal.style.display='flex'; setTimeout(()=>modal.classList.add('open'),10); }
+}
+function closeMsgChoice(){
+  const modal = document.getElementById('msg-choice-modal');
+  if(modal){ modal.classList.remove('open'); setTimeout(()=>{ modal.style.display='none'; },300); }
+}
+function sendSMSToFriend(){
+  if(!_pendingChatPhone){ toast('This friend hasn\'t added a phone number'); return; }
+  const msg = encodeURIComponent('Hey, checking in on you from Unloopd 👋 How are you doing?');
+  window.open('sms:' + _pendingChatPhone + '?body=' + msg);
+}
+window.openMessageChoice = openMessageChoice;
+window.closeMsgChoice    = closeMsgChoice;
+window.sendSMSToFriend   = sendSMSToFriend;
+window._pendingChatId    = _pendingChatId;
+
+/* ═══════════════════════════ SMS ACCOUNTABILITY ALERTS ══════════════ */
+// Override notifyPartnerOfSlip to ALSO send an SMS if partner has a phone number
+async function notifyPartnerOfSlip(){
+  const ap = state.accountabilityPartner;
+  if(!ap) return;
+
+  // In-app notification (Firebase)
+  try{
+    const notif = {
+      type: 'slip_alert',
+      fromId: state.userId,
+      fromName: state.name,
+      fromUsername: state.username,
+      fromHabit: state.habit,
+      streak: getStreak(),
+      ts: Date.now(),
+    };
+    await storage.set('apnotif:'+ap.userId+':'+state.userId+':'+notif.ts, JSON.stringify(notif), true);
+  }catch(e){}
+
+  // SMS to partner's phone if they have one stored
+  const partnerPhone = ap.phone || state.partnerPhone || '';
+  if(partnerPhone){
+    const partnerName = ap.displayName || 'your partner';
+    const myName = state.name || 'Your partner';
+    const msg = encodeURIComponent(
+      `Check in with ${myName} — they just logged a struggle on Unloopd and could use your support right now 💙`
+    );
+    // Open SMS app pre-filled — user just has to tap Send
+    window.open('sms:' + partnerPhone + '?body=' + msg);
+  }
+}
+
+// Also send SMS when an urge is lost
+async function notifyPartnerOfUrge(){
+  const ap = state.accountabilityPartner;
+  if(!ap) return;
+  const partnerPhone = ap.phone || state.partnerPhone || '';
+  if(partnerPhone){
+    const myName = state.name || 'Your partner';
+    const msg = encodeURIComponent(
+      `Check in with ${myName} — they gave into an urge on Unloopd and could use your encouragement 💙`
+    );
+    window.open('sms:' + partnerPhone + '?body=' + msg);
+  }
+}
 
 /* ═══════════════════════════ BOOT ═══════════════════════════════════ */
 // Re-assign after all functions defined (some were assigned before their async definition)
